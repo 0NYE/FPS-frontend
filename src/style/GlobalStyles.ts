@@ -7,10 +7,10 @@ const GlobalStyles = createGlobalStyle`
   *::before,
   *::after {
     box-sizing: border-box;
+    color: ${(props) => props.theme.colors.black};
   }
   body {
     font-family: 'Noto Sans KR', sans-serif;
-    color: ${(props) => props.theme.colors.black};
   }
   a {
     color: inherit;
