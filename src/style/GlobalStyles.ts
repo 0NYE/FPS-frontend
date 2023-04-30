@@ -7,9 +7,14 @@ const GlobalStyles = createGlobalStyle`
   *::before,
   *::after {
     box-sizing: border-box;
+    color: ${(props) => props.theme.colors.black};
   }
   body {
     font-family: 'Noto Sans KR', sans-serif;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 `;
 
