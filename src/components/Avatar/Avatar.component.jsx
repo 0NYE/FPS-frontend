@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import { Wrapper, StyledAvatar } from "./Avatar.styles";
+import { Wrapper} from "./Avatar.styles";
+import "./Avatar.css"
 
 const sizes = {
   small: {
@@ -14,18 +15,22 @@ const sizes = {
   },
 };
 
-const Avatar = ({size="medium"}) => {
+const Avatar = ({size="large"}) => {
   const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
   const radius =sizes[size].radius;
 
   
   return (
     <Wrapper>
-      <StyledAvatar rad={radius}
-      backgroundImg={Image}
-      style={{margin:'20px'}} 
+      <img
+      className="profile"
+      src={Image}
+      alt=""
+      width={radius}
+      height={radius}
       >
-      </StyledAvatar>
+
+      </img>
     </Wrapper>
   );
 };
