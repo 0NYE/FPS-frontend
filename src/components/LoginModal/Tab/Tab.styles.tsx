@@ -7,8 +7,8 @@ interface TabItemProps {
 export const TabItem = styled.li<TabItemProps>`
   flex: 1 0 auto;
   padding: 16px;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   font-size: 1.1rem;
   color: ${(props) => props.theme.colors.grey1};
   text-align: center;
