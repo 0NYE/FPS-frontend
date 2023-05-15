@@ -4,7 +4,7 @@ import { TabItem, TabLayout } from "@/components/LoginModal/Tab/Tab.styles";
 
 interface TabProps {
   items: string[];
-  onChange: (selectedItem: string) => void;
+  onChange?: (selectedItem: string) => void;
 }
 
 const Tab = ({ items, onChange }: TabProps) => {
@@ -15,7 +15,7 @@ const Tab = ({ items, onChange }: TabProps) => {
     if (!item) return;
 
     setSelectedItem(item);
-    onChange(item);
+    if (onChange) onChange(item);
   };
 
   return (
