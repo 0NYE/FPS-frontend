@@ -20,5 +20,4 @@ export const LabeledInputLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
-  width: 330px;
 `;
