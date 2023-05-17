@@ -18,11 +18,9 @@ import { ReactComponent as Tag } from "@/assets/images/Tags.svg";
 
 
 
-const Problem = ({title,bookmark,like,dislike,successrate,name,content})=>{
-    const [isPassed,setIsPassed] = useState(true);
-    const [isHTML,setIsHTML] =useState(true);
-    const [isCSS,setIsCSS] =useState(true);
-    const [isJS,setIsJS] =useState(true);
+const Problem = ({title,bookmark,like,dislike,successrate,makerName,content,
+            isPassed,setIsPassed,language,setLanguage
+})=>{
     return(
         <ProblemBlock>
           <ProblemWrap>
@@ -39,23 +37,25 @@ const Problem = ({title,bookmark,like,dislike,successrate,name,content})=>{
                 <Like width="20px" height="16px"/>{like+'    '} 
                 <Dislike width="20px" height="16px"/>{dislike+'    '} 
                 <Successrate width="20px" height="16px"/>{successrate+'%'+'    '}
-                <Person></Person>{name+'    '}
+                <Person></Person>{makerName+'    '}
             </ProblemMetaData>
             <TagData>
                 <Tag></Tag>
-                <TagBox>{content}</TagBox>
+                {content.map((item,index)=>
+                    <TagBox key={index}>{item}</TagBox>
+                )}
             </TagData>
           </ProblemWrap>
           <LanguageBox>
-            {isHTML?(<HTML></HTML>
+            {language.HTML?(<HTML></HTML>
             ):(
                 <></>
             )}
-            {isCSS?(<CSS></CSS>
+            {language.CSS?(<CSS></CSS>
             ):(
                 <></>
             )}
-            {isJS?(<JS></JS>
+            {language.JS?(<JS></JS>
             ):(
                 <></>
             )}
