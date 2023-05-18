@@ -9,7 +9,7 @@ interface itemProps {
 
 const Dropdown: React.FC<itemProps> = ({ items }) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [selectItem, setSelectItem] = useState<string>("");
+  const [selectedItem, setSelectedItem] = useState<string>("");
 
   const toggleDropDown = () => {
     setShowDropDown(!showDropDown);
@@ -22,7 +22,7 @@ const Dropdown: React.FC<itemProps> = ({ items }) => {
   };
 
   const itemSelection = (item: string): void => {
-    setSelectItem(item);
+    setSelectedItem(item);
   };
   return (
     <>
@@ -32,8 +32,8 @@ const Dropdown: React.FC<itemProps> = ({ items }) => {
           dismissHandler(e)
         }
       >
-        <div>{selectItem ? selectItem : "Title"} </div>{" "}
-        {!selectItem && <ChevronDown></ChevronDown>}
+        <div>{selectedItem ? selectedItem : "Title"} </div>{" "}
+        {!selectedItem && <ChevronDown></ChevronDown>}
         {showDropDown && (
           <DropDown
             items={items}
