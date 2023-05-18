@@ -6,7 +6,7 @@ import {
   ProblemBlockHeaderBox,
   ProblemBlockDataBox,
   ProblemBlockMetaDataSpan,
-  TagSpan,
+  ProblemBlockTagSpan,
   ProblemBlockTagBox,
   ProblemBlockTagList,
 } from "./ProblemBlock.styles";
@@ -97,7 +97,7 @@ const ProblemBlock = ({
           <ProblemBlockTagList>
             {tags.map((item) => (
               <li key={item}>
-                <TagSpan>{item}</TagSpan>
+                <ProblemBlockTagSpan>{item}</ProblemBlockTagSpan>
               </li>
             ))}
           </ProblemBlockTagList>
