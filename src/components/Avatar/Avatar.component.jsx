@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-import { Wrapper} from "./Avatar.styles";
-import "./Avatar.css"
+import { ProfileIMG, Wrapper} from "./Avatar.styles";
 
 const sizes = {
   small: {
@@ -15,22 +14,19 @@ const sizes = {
   },
 };
 
-const Avatar = ({size="large"}) => {
-  const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
+const Avatar = ({size="large",src}) => {
+  const [Image, setImage] = useState(src)
   const radius =sizes[size].radius;
 
   
   return (
     <Wrapper>
-      <img
-      className="profile"
-      src={Image}
-      alt=""
+      <ProfileIMG src={Image} 
+      alt="profile" 
       width={radius}
       height={radius}
       >
-
-      </img>
+      </ProfileIMG>
     </Wrapper>
   );
 };
