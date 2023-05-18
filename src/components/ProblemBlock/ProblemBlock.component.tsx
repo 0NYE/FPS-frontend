@@ -72,15 +72,15 @@ const ProblemBlock = ({
         </ProblemBlockHeaderBox>
         <ProblemBlockMetaDataBox>
           <ProblemBlockMetaDataSpan>
-            {isBookmark ? <Star /> : <StarActivated />}
+            {isBookmark ? <StarActivated /> : <Star />}
             {bookmarkCount}
           </ProblemBlockMetaDataSpan>
           <ProblemBlockMetaDataSpan>
-            {isLike ? <Like /> : <LikeActivated />}
+            {isLike ? <LikeActivated /> : <Like />}
             {likeCount}
           </ProblemBlockMetaDataSpan>
           <ProblemBlockMetaDataSpan>
-            {isDislike ? <Dislike /> : <DislikeActivated />}
+            {isDislike ? <DislikeActivated /> : <Dislike />}
             {dislikeCount}
           </ProblemBlockMetaDataSpan>
           <ProblemBlockMetaDataSpan>
