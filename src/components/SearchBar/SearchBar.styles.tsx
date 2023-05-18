@@ -5,7 +5,6 @@ export const SearchBarLayout = styled.div`
 `;
 
 export const SearchBarInput = styled.input`
-  width: 100px;
   padding: 8px 12px 8px 30px;
   border: none;
   border-radius: 4px;

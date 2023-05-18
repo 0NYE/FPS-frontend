@@ -7,10 +7,10 @@ import {
   SvgContainer,
 } from "@/components/SearchBar/SearchBar.styles";
 
-const SearchBar = () => {
+const SearchBar = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <SearchBarLayout>
-      <SearchBarInput />
+      <SearchBarInput {...props} />
       <SvgContainer>
         <Glass />
       </SvgContainer>
