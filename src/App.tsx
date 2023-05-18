@@ -1,13 +1,17 @@
+import { Routes, Route } from "react-router-dom";
+
 import { ThemeProvider } from "styled-components";
 
-import LoginModal from "@/components/LoginModal/LoginModal.component";
+import ProblemListPage from "@/pages/ProblemListPage/ProblemListPage.component";
 import GlobalStyles from "@/style/GlobalStyles";
 import { theme } from "@/style/theme";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div></div>
+      <Routes>
+        <Route index element={<ProblemListPage />}></Route>
+      </Routes>
       <GlobalStyles />
     </ThemeProvider>
   );
