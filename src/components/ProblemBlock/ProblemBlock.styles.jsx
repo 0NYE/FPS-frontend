@@ -21,7 +21,7 @@ export const ProblemTitle = styled.div`
   }
 `;
 
-export const ProblemMetaData = styled.div`
+export const ProblemMetaData = styled.div `
   height: 14px;
   font-size: 12px;
   margin-bottom: 12px;
