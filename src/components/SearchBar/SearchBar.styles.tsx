@@ -4,9 +4,7 @@ export const SearchBarLayout = styled.div`
   position: relative;
 `;
 
-export const SearchBarInput = styled.input.attrs({
-  placeholder: "검색",
-})`
+export const SearchBarInput = styled.input`
   width: 100px;
   padding: 8px 12px 8px 30px;
   border: none;

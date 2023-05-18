@@ -5,9 +5,9 @@ import {
   SearchBarLayout,
   SearchBarInput,
   SvgContainer,
-} from "@/components/Searchbar/Searchbar.styles";
+} from "@/components/SearchBar/SearchBar.styles";
 
-const Search = () => {
+const SearchBar = () => {
   return (
     <SearchBarLayout>
       <SearchBarInput />
@@ -18,4 +18,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchBar;
