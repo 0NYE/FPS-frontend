@@ -1,24 +1,15 @@
 import React from "react";
 
 import {
-  SearchWrapper,
-  SingleSearch,
-  Glasses,
-  GlassesCircle,
-  GlassesLine,
+  SearchBarLayout,
+  SearchBarInput,
 } from "@/components/Searchbar/Searchbar.styles";
 
 const Search = () => {
   return (
-    <>
-      <SearchWrapper>
-        <SingleSearch />
-        <Glasses>
-          <GlassesCircle />
-          <GlassesLine />
-        </Glasses>
-      </SearchWrapper>
-    </>
+    <SearchBarLayout>
+      <SearchBarInput />
+    </SearchBarLayout>
   );
 };
 
