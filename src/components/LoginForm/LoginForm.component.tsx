@@ -1,5 +1,8 @@
 import React from "react";
 
+import { useAtom } from "jotai";
+
+import { userAtom } from "@/atoms/user";
 import Button from "@/components/Button/Button.component";
 import LabeledInput from "@/components/LabeledInput/LabeledInput.component";
 import { LoginFormLayout } from "@/components/LoginForm/LoginForm.style";
@@ -9,6 +12,7 @@ import { useInput } from "@/hooks/useInput";
 const LoginForm = () => {
   const idInput = useInput("");
   const passwordInput = useInput("");
+  const [user, setUser] = useAtom(userAtom);
 
   const buttonClickHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
     fetch(`${domain}/auth/login`, {
@@ -20,6 +24,7 @@ const LoginForm = () => {
     })
       .then((response) => {
         alert("로그인에 성공했습니다.");
+        setUser(true);
         console.log("login success!");
       })
       .catch((err) => {
