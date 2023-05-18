@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
 
-import { LanguageBox, ProblemBlock, ProblemMetaData, ProblemTitle, ProblemWrap, 
+import { LanguageBox, ProblemBlockLayout, ProblemMetaData, ProblemTitle, ProblemWrap, 
         TagBox, TagData,       
-}from './Problem.styles' 
+}from './ProblemBlock.styles' 
 
 import { ReactComponent as Activated } from "@/assets/images/activated.svg";
 import { ReactComponent as CSS } from "@/assets/images/css.svg";
@@ -18,11 +18,11 @@ import { ReactComponent as Tag } from "@/assets/images/Tags.svg";
 
 
 
-const Problem = ({title,bookmark,like,dislike,successrate,makerName,content,
+const ProblemBlock = ({title,bookmark,like,dislike,successrate,makerName,content,
             isPassed,setIsPassed,language,setLanguage
 })=>{
     return(
-        <ProblemBlock>
+        <ProblemBlockLayout>
           <ProblemWrap>
             <ProblemTitle>{title}
             {isPassed?(
@@ -60,8 +60,8 @@ const Problem = ({title,bookmark,like,dislike,successrate,makerName,content,
                 <></>
             )}
           </LanguageBox>
-        </ProblemBlock>
+        </ProblemBlockLayout>
     )
 
 }
-export default Problem;
+export default ProblemBlock;
