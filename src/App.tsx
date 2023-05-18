@@ -7,7 +7,7 @@ import { theme } from "@/style/theme";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <LoginModal isOpen={true}></LoginModal>
+      <div></div>
       <GlobalStyles />
     </ThemeProvider>
   );
