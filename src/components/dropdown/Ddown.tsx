@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { DropDownBoxWrap,
-        DropDownContainer,
-        ListItem, 
-} from './Dropdown.styles';
+import {
+  DropDownBoxWrap,
+  DropDownContainer,
+  ListItem,
+} from "./Dropdown.styles";
 
 type DropDownProps = {
   items: string[];
   showDropDown: boolean;
-  toggleDropDown: ()=>void ;
-  itemSelection: (text:string)=> void;
+  toggleDropDown: () => void;
+  itemSelection: (text: string) => void;
 };
 
 const DropDown: React.FC<DropDownProps> = ({
@@ -17,8 +18,8 @@ const DropDown: React.FC<DropDownProps> = ({
   itemSelection,
 }: DropDownProps): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  
-  const onClickHandler = (item:string): void => {
+
+  const onClickHandler = (item: string): void => {
     itemSelection(item);
   };
 
@@ -29,9 +30,11 @@ const DropDown: React.FC<DropDownProps> = ({
   return (
     <>
       <DropDownBoxWrap>
-        <DropDownContainer className={showDropDown ? 'dropdown' : 'dropdown active'}>
-          {items && items.map(
-            (item: string, index: number): JSX.Element => {
+        <DropDownContainer
+          className={showDropDown ? "dropdown" : "dropdown active"}
+        >
+          {items &&
+            items.map((item: string, index: number): JSX.Element => {
               return (
                 <ListItem
                   key={index}
@@ -42,10 +45,9 @@ const DropDown: React.FC<DropDownProps> = ({
                   {item}
                 </ListItem>
               );
-            }
-          )}
+            })}
         </DropDownContainer>
-      </DropDownBoxWrap>  
+      </DropDownBoxWrap>
     </>
   );
 };
