@@ -8,6 +8,12 @@ export const ProblemBlockLayout = styled.div`
   padding: 16px 16px;
   background-color: ${(props) => props.theme.colors.grey4};
   color: ${(props) => props.theme.colors.black};
+  transition: background-color 220ms ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.grey3};
+  }
 `;
 
 export const ProblemBlockDataBox = styled.div`
