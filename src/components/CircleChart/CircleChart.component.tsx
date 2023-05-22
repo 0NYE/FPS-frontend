@@ -46,12 +46,14 @@ interface CircleChartProps {
   score: number;
   perfectScore: number;
   size: Size;
+  animation: boolean;
 }
 
 export const CircleChart = ({
   score,
   perfectScore = 100,
   size = "small",
+  animation = true,
 }: CircleChartProps) => {
   let theme: Theme = "bad";
   if (score >= perfectScore * 0.75) theme = "best";
@@ -69,7 +71,8 @@ export const CircleChart = ({
         strokeWidth={strokeWidth}
         strokeColor={color}
         strokeBackgroundColor={backgroundColor}
-        duration={1.25}
+        animationStartMs={animation ? 300 : 0}
+        animationDuration={animation ? 1.25 : 0}
       />
       <CircleChartSpan color={color} fontSize={fontSize}>
         {score}

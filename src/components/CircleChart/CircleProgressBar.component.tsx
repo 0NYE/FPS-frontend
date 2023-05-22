@@ -6,7 +6,8 @@ interface CircleProgressbarProps {
   strokeWidth?: number;
   strokeColor?: string;
   strokeBackgroundColor?: string;
-  duration?: number;
+  animationStartMs?: number;
+  animationDuration?: number;
 }
 
 export const CircleProgressbar = ({
@@ -15,7 +16,8 @@ export const CircleProgressbar = ({
   strokeWidth = 12,
   strokeColor = "#000",
   strokeBackgroundColor = "",
-  duration = 1,
+  animationStartMs = 300,
+  animationDuration = 1,
 }: CircleProgressbarProps) => {
   if (progress > 100) progress = 100;
   if (progress < 0) progress = 0;
@@ -36,12 +38,12 @@ export const CircleProgressbar = ({
       if (!circle.current) return;
       const newOffset = circumference - (progress / 100) * circumference;
 
-      circle.current.style.transition = `stroke-dashoffset ${duration}s`;
+      circle.current.style.transition = `stroke-dashoffset ${animationDuration}s`;
       circle.current.style.strokeDashoffset = newOffset.toString();
-    }, 300);
+    }, animationStartMs);
 
     return () => clearTimeout(id);
-  }, [progress, circumference, duration]);
+  }, [progress, circumference, animationDuration]);
 
   return (
     <div>
