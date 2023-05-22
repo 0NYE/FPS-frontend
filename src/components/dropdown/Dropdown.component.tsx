@@ -5,9 +5,10 @@ import { CategoryMenuBox, ChevronDown } from "./Dropdown.styles";
 
 interface itemProps {
   items: string[];
+  onChange: (selectedItem: string) => void;
 }
 
-const Dropdown: React.FC<itemProps> = ({ items }) => {
+const Dropdown: React.FC<itemProps> = ({ items, onChange }) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string>("");
 
@@ -23,6 +24,7 @@ const Dropdown: React.FC<itemProps> = ({ items }) => {
 
   const itemSelection = (item: string): void => {
     setSelectedItem(item);
+    onChange(item);
   };
   return (
     <>
