@@ -27,11 +27,6 @@ import { ReactComponent as StarActivated } from "@/assets/images/star_activated.
 const PostBlock= 
 ({userName,
   title,
-  year,
-  month,
-  day,
-  hour,
-  min,
   isBookmark,
   isLike,
   isDisLike,
@@ -39,12 +34,16 @@ const PostBlock=
   likeCount,
   dislikeCount,
   commentCount,
+  isActive,
+  setIsActive,
+  handleClick
 })=>{
-  const [isActive, setIsActive] = useState(false);
-
-  const handleClick = () => {
-    setIsActive(!isActive);
-  };
+  const currentDate = new Date();
+  const year = currentDate.getFullYear(); 
+  const month = currentDate.getMonth() + 1;
+  const day = currentDate.getDate();
+  const hour = currentDate.getHours();
+  const min = currentDate.getMinutes();
   return(
   <PostBox active={isActive} onClick={handleClick}>
     <PostDiv>
@@ -56,9 +55,9 @@ const PostBlock=
           <PostTitle>{title}</PostTitle>
         </PostHeader>
         <NameTimeDiv>
-          <NameTimeSpan active={isActive} onClick={handleClick}>
-            {userName} {year}-{month}-{day} {hour}:{min}
-          </NameTimeSpan>
+        <NameTimeSpan active={isActive} onClick={handleClick}>
+          {userName} {year}-{month}-{day} {hour}:{min}
+        </NameTimeSpan>
         </NameTimeDiv>
         <PostBlockTagBox>
           <PostBlockDataSpan active={isActive} onClick={handleClick}>

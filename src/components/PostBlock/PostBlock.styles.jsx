@@ -25,6 +25,7 @@ export const PostTitle=styled.div`
 
 export const PostDiv=styled.div`
   display:flex;
+  align-items: center
   flex-direction:row;
 `;
 
@@ -38,7 +39,7 @@ export const NameTimeSpan=styled.span`
   border-radius: 2px;
   background: ${({ active }) => (active ? `${colors.grey4}` : `${colors.white}`)};
   font-size: 13px;
-  font-color: ${(props) => props.theme.colors.grey1};
+  font-color: ${colors.grey1};
 `;
 
 export const PostBlockTagBox = styled.div`
