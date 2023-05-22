@@ -1,34 +1,43 @@
 import { useEffect, useRef } from "react";
 
-import { CircleContent} from "./CircleProgressBar.styles";
+interface CircleProgressbarProps {
+  progress: number;
+  radius?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  strokeBackgroundColor?: string;
+  duration?: number;
+}
 
 export const CircleProgressbar = ({
-  progress = 0,
+  progress,
   radius = 100,
-  stroke = 20,
-  color = "",
-  backgroundColor = "",
-  duration = 3,
-}) => {
-
+  strokeWidth = 12,
+  strokeColor = "#000",
+  strokeBackgroundColor = "",
+  duration = 1,
+}: CircleProgressbarProps) => {
   if (progress > 100) progress = 100;
   if (progress < 0) progress = 0;
 
   const diameter = radius * 2;
-  const normalizedRadius = radius - stroke / 1.5;
+  const normalizedRadius = radius - strokeWidth / 1.5;
   const circumference = normalizedRadius * 2 * Math.PI;
 
-  const circle = useRef();
+  const circle = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
+    if (!circle.current) return;
+
     circle.current.style.transition = "";
-    circle.current.style.strokeDashoffset = circumference;
+    circle.current.style.strokeDashoffset = circumference.toString();
 
     const id = setTimeout(() => {
+      if (!circle.current) return;
       const newOffset = circumference - (progress / 100) * circumference;
 
       circle.current.style.transition = `stroke-dashoffset ${duration}s`;
-      circle.current.style.strokeDashoffset = newOffset;
+      circle.current.style.strokeDashoffset = newOffset.toString();
     }, 300);
 
     return () => clearTimeout(id);
@@ -40,8 +49,8 @@ export const CircleProgressbar = ({
         <circle
           className="circle"
           fill="none"
-          stroke={backgroundColor}
-          strokeWidth={stroke}
+          stroke={strokeBackgroundColor}
+          strokeWidth={strokeWidth}
           r={normalizedRadius}
           cx={radius}
           cy={radius}
@@ -49,18 +58,16 @@ export const CircleProgressbar = ({
         <circle
           ref={circle}
           className="circle"
-          stroke={color}
+          stroke={strokeColor}
           fill="none"
           strokeDasharray={`${circumference}`}
-          strokeWidth={stroke}
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           r={normalizedRadius}
           cx={radius}
           cy={radius}
           transform={`rotate(270 ${radius} ${radius})`}
-        >
-          
-        </circle>
+        ></circle>
       </svg>
     </div>
   );
