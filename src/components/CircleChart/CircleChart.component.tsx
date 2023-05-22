@@ -60,7 +60,7 @@ export const CircleChart = ({
   const { color, backgroundColor } = circleChartThemes[theme];
   const { radius, strokeWidth, fontSize } = circleChartSizes[size];
   const progress = (score / perfectScore) * 100;
-  console.log(fontSize);
+
   return (
     <CircleChartLayout radius={radius}>
       <CircleProgressbar
