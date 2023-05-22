@@ -44,9 +44,9 @@ type Size = "small" | "medium" | "large";
 
 interface CircleChartProps {
   score: number;
-  perfectScore: number;
-  size: Size;
-  animation: boolean;
+  perfectScore?: number;
+  size?: Size;
+  animation?: boolean;
 }
 
 export const CircleChart = ({
