@@ -5,7 +5,7 @@ import { CircleContent} from "./CircleProgressBar.styles";
 export const CircleProgressbar = ({
   progress = 0,
   radius = 100,
-  stroke = 10,
+  stroke = 20,
   color = "",
   backgroundColor = "",
   duration = 3,
@@ -62,15 +62,6 @@ export const CircleProgressbar = ({
           
         </circle>
       </svg>
-      {/* {children && (
-        <CircleContent
-          diameter={diameter}
-          stroke={stroke}
-          radius={radius}
-        >
-          {children}
-        </CircleContent>
-      )} */}
     </div>
   );
 };
