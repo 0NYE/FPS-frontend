@@ -1,36 +1,46 @@
 import { CircleProgressbar } from "./CircleProgressBar.component";
 
-import { CircleChartLayout } from "@/components/CircleChart/CircleChart.styles";
+import {
+  CircleChartLayout,
+  CircleChartSpan,
+} from "@/components/CircleChart/CircleChart.styles";
 import { colors } from "@/style/theme";
 
 const circleChartThemes = {
   bad: {
     color: colors.red,
-    backgroundColor: colors.white,
+    backgroundColor: colors.lightRed,
   },
   good: {
     color: colors.orange,
-    backgroundColor: colors.white,
+    backgroundColor: colors.lightOrange,
   },
   best: {
     color: colors.green,
-    backgroundColor: colors.white,
+    backgroundColor: colors.lightGreen,
   },
 };
 
 const circleChartSizes = {
   small: {
-    radius: 48,
-    strokeWidth: 11,
+    radius: 24,
+    strokeWidth: 5,
+    fontSize: 14,
   },
   medium: {
-    radius: 68,
-    strokeWidth: 16,
+    radius: 34,
+    strokeWidth: 7,
+    fontSize: 16,
+  },
+  large: {
+    radius: 50,
+    strokeWidth: 9,
+    fontSize: 22,
   },
 };
 
 type Theme = "best" | "good" | "bad";
-type Size = "small" | "medium";
+type Size = "small" | "medium" | "large";
 
 interface CircleChartProps {
   score: number;
@@ -48,18 +58,22 @@ export const CircleChart = ({
   else if (score >= perfectScore * 0.25) theme = "good";
 
   const { color, backgroundColor } = circleChartThemes[theme];
-  const { radius, strokeWidth } = circleChartSizes[size];
+  const { radius, strokeWidth, fontSize } = circleChartSizes[size];
   const progress = (score / perfectScore) * 100;
-  const pointsForNextCategory = score;
-
+  console.log(fontSize);
   return (
-    <CircleProgressbar
-      progress={progress}
-      radius={radius}
-      strokeWidth={strokeWidth}
-      strokeColor={color}
-      strokeBackgroundColor={backgroundColor}
-      duration={1}
-    />
+    <CircleChartLayout radius={radius}>
+      <CircleProgressbar
+        progress={progress}
+        radius={radius}
+        strokeWidth={strokeWidth}
+        strokeColor={color}
+        strokeBackgroundColor={backgroundColor}
+        duration={1.25}
+      />
+      <CircleChartSpan color={color} fontSize={fontSize}>
+        {score}
+      </CircleChartSpan>
+    </CircleChartLayout>
   );
 };
