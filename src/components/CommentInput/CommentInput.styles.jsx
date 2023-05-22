@@ -7,7 +7,7 @@ export const InputBoxContainer=styled.div`
 
 `;
 
-export const InputBox=styled.input`
+export const InputBox=styled.textarea`
   width:500px;
   height:123px;
   background: ${(props) => props.theme.colors.grey4};

@@ -4,14 +4,12 @@ import { InputBoxContainer,InputBox,ButtonWrapper } from './CommentInput.styles'
 
 import Button from '../Button/Button.component';
 
-const CommentInput=()=>{
+const CommentInput=(onSubmit)=>{
   
   return(
   <InputBoxContainer>
     <InputBox placeholder='댓글을 입력하세요'></InputBox>
-    <ButtonWrapper>
-      <Button variant="green" size="small">댓글쓰기</Button>
-    </ButtonWrapper>
+    <Button variant="green" size="small" onClick={onSubmit}>댓글쓰기</Button>
   </InputBoxContainer>
   )
 }
