@@ -23,11 +23,7 @@ import { ReactComponent as LikeActivated } from "@/assets/images/like_activated.
 
 const Comment=({
   userName,
-  year,
-  month,
-  day,
-  hour,
-  min,
+  avatarURL,
   commentContent,
   isLike,
   likeCount,
@@ -35,11 +31,17 @@ const Comment=({
   dislikeCount,
   commentCount
 })=>{
+  const currentDate = new Date();
+  const year = currentDate.getFullYear(); 
+  const month = currentDate.getMonth() + 1;
+  const day = currentDate.getDate();
+  const hour = currentDate.getHours();
+  const min = currentDate.getMinutes();
   return(
   <CommentBox>
     <CommentHeader>
       <UserDiv>
-        <Avatar size="small"></Avatar>
+        <Avatar size="small" src={avatarURL}></Avatar>
         <CommentTitle>{userName}</CommentTitle>
       </UserDiv>
       <TimeDiv>
