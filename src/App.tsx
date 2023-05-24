@@ -10,7 +10,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route index element={<ProblemListPage />}></Route>
+        <Route index element={<ProblemListPage />} />
+        <Route path="/problems" element={<ProblemListPage />} />
       </Routes>
       <GlobalStyles />
     </ThemeProvider>
