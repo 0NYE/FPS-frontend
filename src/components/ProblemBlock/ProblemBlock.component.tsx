@@ -26,9 +26,9 @@ import { ReactComponent as Success } from "@/assets/images/success.svg";
 import { ReactComponent as Successrate } from "@/assets/images/successrate.svg";
 import { ReactComponent as Tag } from "@/assets/images/Tags.svg";
 
-type supportedLanguage = "HTML" | "CSS" | "JS";
+export type SupportedLanguage = "HTML" | "CSS" | "JS";
 
-const languageSvgMap: { [K in supportedLanguage]: typeof HTML } = {
+const languageSvgMap: { [K in SupportedLanguage]: typeof HTML } = {
   HTML: HTML,
   CSS: CSS,
   JS: JS,
@@ -46,7 +46,7 @@ interface ProblemBlockProps {
   successRate: number;
   author: string;
   tags: string[];
-  languages: supportedLanguage[];
+  languages: SupportedLanguage[];
 }
 
 const ProblemBlock = ({
