@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { colors } from "@/style/theme";
 
-export const FileSubmitLayout = styled.div<{ isFileSubmitted: boolean }>`
+export const FileSubmissionLayout = styled.div<{ isFileSubmitted: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -15,7 +15,7 @@ export const FileSubmitLayout = styled.div<{ isFileSubmitted: boolean }>`
   background-color: ${colors.grey4};
 `;
 
-export const FileSubmitHeader = styled.div<{ isFileSubmitted: boolean }>`
+export const FileSubmissionHeader = styled.div<{ isFileSubmitted: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -24,7 +24,7 @@ export const FileSubmitHeader = styled.div<{ isFileSubmitted: boolean }>`
     isFileSubmitted ? `${colors.green}` : `${colors.grey1}`};
 `;
 
-export const FileSubmitSVG = styled.div`
+export const FileSubmissionSvgBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@ export const FileSubmitSVG = styled.div`
   }
 `;
 
-export const FileSubmitBottom = styled.div<{ isFileSubmitted: boolean }>`
+export const FileSubmissionFooter = styled.div<{ isFileSubmitted: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;

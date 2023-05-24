@@ -1,13 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import {
-  FileSubmitLayout,
-  FileSubmitHeader,
-  FileSubmitSVG,
+  FileSubmissionLayout,
+  FileSubmissionHeader,
+  FileSubmissionSvgBox,
   FileInput,
   FileLabel,
-  FileButton,
-  FileSubmitBottom,
+  FileSubmissionFooter,
 } from "./FileSubmissionButton.styles";
 
 import { ReactComponent as File } from "@/assets/images/File.svg";
@@ -50,17 +49,17 @@ const FileSubmissionButton = ({
   };
 
   return (
-    <FileSubmitLayout isFileSubmitted={isFileSubmitted}>
+    <FileSubmissionLayout isFileSubmitted={isFileSubmitted}>
       <FileLabel htmlFor="sub">
-        <FileSubmitHeader isFileSubmitted={isFileSubmitted}>
+        <FileSubmissionHeader isFileSubmitted={isFileSubmitted}>
           {fileType || "파일"} 제출
-        </FileSubmitHeader>
-        <FileSubmitSVG>
+        </FileSubmissionHeader>
+        <FileSubmissionSvgBox>
           {isFileSubmitted ? <FileActivated /> : <File />}
-        </FileSubmitSVG>
-        <FileSubmitBottom isFileSubmitted={isFileSubmitted}>
+        </FileSubmissionSvgBox>
+        <FileSubmissionFooter isFileSubmitted={isFileSubmitted}>
           {selectedFileName && <p>{selectedFileName}</p>}
-        </FileSubmitBottom>
+        </FileSubmissionFooter>
       </FileLabel>
       <FileInput
         id="sub"
@@ -68,7 +67,7 @@ const FileSubmissionButton = ({
         accept={fileType ? fileMIMEType[fileType] : undefined}
         onChange={onChangeHandler}
       ></FileInput>
-    </FileSubmitLayout>
+    </FileSubmissionLayout>
   );
 };
 
