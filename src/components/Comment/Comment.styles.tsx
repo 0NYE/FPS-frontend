@@ -1,28 +1,30 @@
 import styled from "styled-components";
 
 export const CommentBox = styled.div`
-  width: 500;
-  height: 84;
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  position: relative;
+  padding: 16px;
 `;
 
 export const CommentHeader = styled.div`
-  width: 100%;
-  height: 26px;
   display: flex;
   justify-content: space-between;
 `;
 
 export const UserDiv = styled.div`
   display: flex;
-  flex-direction: row;
+  gap: 8px;
 `;
 
-export const TimeDiv = styled.div``;
+export const TimeDiv = styled.div`
+  font-size: 14px;
+  color: ${(props) => props.theme.colors.grey1};
+`;
 
 export const CommentTitle = styled.h3`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 `;
 
@@ -31,17 +33,24 @@ export const CommentDisplayer = styled.div`
 `;
 
 export const CommentBottom = styled.div`
-  display:flex
+  display: flex;
   flex-direction: row;
 `;
 
 export const CommentDataSpan = styled.span`
+  display: flex;
   align-items: center;
-  margin-right: 8px;
+  margin-right: 16px;
+  color: ${(props) => props.theme.colors.grey1};
 
   & > svg {
     width: 14px;
     height: 14px;
-    margin: 2px;
+
+    margin-right: 4px;
+
+    path {
+      fill: ${(props) => props.theme.colors.grey1};
+    }
   }
 `;
