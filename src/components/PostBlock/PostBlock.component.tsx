@@ -1,12 +1,13 @@
 import {
   PostBlockDataSpan,
-  PostBox,
+  PostBlockLayout,
   AvatarDiv,
   OverallDiv,
   PostHeader,
   PostTitle,
   NameTimeDiv,
-  NameTimeSpan,
+  NameSpan,
+  TimeSpan,
   PostBlockTagBox,
   PostDiv,
   ChevronDiv,
@@ -61,34 +62,33 @@ const PostBlock = ({
   const min = date.getMinutes();
 
   return (
-    <PostBox active={isActive} onClick={() => onClick && onClick(id)}>
+    <PostBlockLayout active={isActive} onClick={() => onClick && onClick(id)}>
       <PostDiv>
         <AvatarDiv>
-          <Avatar size={"small"} />
+          <Avatar size={"medium"} />
         </AvatarDiv>
         <OverallDiv>
           <PostHeader>
             <PostTitle>{title}</PostTitle>
           </PostHeader>
           <NameTimeDiv>
-            <NameTimeSpan active={isActive}>
-              {userName} {year}-{month}-{day} {hour}:{min}
-            </NameTimeSpan>
+            <NameSpan>{userName}</NameSpan>
+            <TimeSpan>{`${year}-${month}-${day} ${hour}:${min}`}</TimeSpan>
           </NameTimeDiv>
           <PostBlockTagBox>
-            <PostBlockDataSpan active={isActive}>
+            <PostBlockDataSpan>
               {isBookmark ? <StarActivated /> : <Star />}
               {bookmarkCount}
             </PostBlockDataSpan>
-            <PostBlockDataSpan active={isActive}>
+            <PostBlockDataSpan>
               {isLike ? <LikeActivated /> : <Like />}
               {likeCount}
             </PostBlockDataSpan>
-            <PostBlockDataSpan active={isActive}>
+            <PostBlockDataSpan>
               {isDislike ? <DislikeActivated /> : <Dislike />}
               {dislikeCount}
             </PostBlockDataSpan>
-            <PostBlockDataSpan active={isActive}>
+            <PostBlockDataSpan>
               <Comment />
               {commentCount}
             </PostBlockDataSpan>
@@ -98,7 +98,7 @@ const PostBlock = ({
       <ChevronDiv>
         <RightChevron />
       </ChevronDiv>
-    </PostBox>
+    </PostBlockLayout>
   );
 };
 
