@@ -25,5 +25,5 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
     fetchData();
   }, [url, options]);
 
-  return [data, loading, error];
+  return { data, loading, error };
 };
