@@ -1,9 +1,10 @@
 import React from "react";
 
 import {
-  ResultBox,
-  ScoreWrap,
-  OverallDiv,
+  SubmissionBlockLayout,
+  SubmissionBlockLeftColumn,
+  SubmissionBlockInfoBox,
+  SubmissionBlockScoreBox,
   UserInform,
   TimeDiv,
   PassDiv,
@@ -52,43 +53,44 @@ const SubmissionBlock = ({
   );
 
   return (
-    <ResultBox isActive={isActive} onClick={() => handleClick(id)}>
-      <OverallDiv>
-        {isSuccess && <PassDiv isSuccess={isSuccess}>통과</PassDiv>}
-        {!isSuccess && <PassDiv isSuccess={isSuccess}>실패:{reason}</PassDiv>}
-        <TimeDiv>
-          {year}-{month}-{day} {hour}:{min}
-        </TimeDiv>
-        <UserInform>
-          <Avatar src={avatarURL} size="small"></Avatar>
-          {userName}
-        </UserInform>
-      </OverallDiv>
-      <ScoreWrap>
-        <ScoreDiv>
-          <CircleChart
-            score={totalScore}
-            perfectScore={perfectScore * Object.keys(metricScores).length}
-            size="medium"
-            animation={true}
-          />
-          총점
-        </ScoreDiv>
-
-        {Object.entries(metricScores).map(([evaluation, currentScore]) => (
-          <ScoreDiv key={evaluation}>
+    <SubmissionBlockLayout isActive={isActive} onClick={() => handleClick(id)}>
+      <SubmissionBlockLeftColumn>
+        <SubmissionBlockInfoBox>
+          {isSuccess && <PassDiv isSuccess={isSuccess}>통과</PassDiv>}
+          {!isSuccess && <PassDiv isSuccess={isSuccess}>실패:{reason}</PassDiv>}
+          <TimeDiv>
+            {year}-{month}-{day} {hour}:{min}
+          </TimeDiv>
+          <UserInform>
+            <Avatar src={avatarURL} size="small"></Avatar>
+            {userName}
+          </UserInform>
+        </SubmissionBlockInfoBox>
+        <SubmissionBlockScoreBox>
+          <ScoreDiv>
             <CircleChart
-              score={currentScore}
-              perfectScore={perfectScore}
-              size="medium"
-              animation={true}
+              score={totalScore}
+              perfectScore={perfectScore * Object.keys(metricScores).length}
+              size="small"
+              animation={false}
             />
-            {evaluation}
+            총점
           </ScoreDiv>
-        ))}
-      </ScoreWrap>
+          {Object.entries(metricScores).map(([evaluation, currentScore]) => (
+            <ScoreDiv key={evaluation}>
+              <CircleChart
+                score={currentScore}
+                perfectScore={perfectScore}
+                size="small"
+                animation={false}
+              />
+              {evaluation}
+            </ScoreDiv>
+          ))}
+        </SubmissionBlockScoreBox>
+      </SubmissionBlockLeftColumn>
       <RightChevron />
-    </ResultBox>
+    </SubmissionBlockLayout>
   );
 };
 

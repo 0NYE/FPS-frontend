@@ -1,25 +1,33 @@
 import styled from "styled-components";
 
-export const ResultBox = styled.div<{ isActive: boolean }>`
+export const SubmissionBlockLayout = styled.div<{ isActive: boolean }>`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 100%;
-  padding: 16px 8px;
+  padding: 8px 16px;
   background: ${(props) =>
     props.isActive
       ? `${props.theme.colors.green}`
       : `${props.theme.colors.grey4}`};
-  justify-content: space-between;
+  cursor: pointer;
+`;
+
+export const SubmissionBlockLeftColumn = styled.div`
+  display: flex;
   align-items: center;
 `;
 
-export const OverallDiv = styled.div`
+export const SubmissionBlockInfoBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  gap: 8px;
+  width: 160px;
 `;
 
 export const PassDiv = styled.div<{ isSuccess: boolean }>`
+  font-size: 16px;
   font-weight: bold;
   color: ${(props) =>
     props.isSuccess
@@ -29,21 +37,27 @@ export const PassDiv = styled.div<{ isSuccess: boolean }>`
 
 export const TimeDiv = styled.div`
   color: ${(props) => props.theme.colors.grey1};
+  font-size: 12px;
 `;
 
 export const UserInform = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: ${(props) => props.theme.colors.grey1};
+  font-size: 12px;
 `;
 
-export const ScoreWrap = styled.div`
+export const SubmissionBlockScoreBox = styled.div`
   display: flex;
-  flex-direction: row;
+  gap: 4px;
 `;
 
 export const ScoreDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 12px;
-  justify-content: center;
   align-items: center;
+  gap: 8px;
+  width: 68px;
+  font-size: 12px;
 `;
