@@ -52,7 +52,7 @@ const SubmissionBlock = ({
   );
 
   return (
-    <ResultBox isActive={isActive} onClick={() => handleClick}>
+    <ResultBox isActive={isActive} onClick={() => handleClick(id)}>
       <OverallDiv>
         {isSuccess && <PassDiv isSuccess={isSuccess}>통과</PassDiv>}
         {!isSuccess && <PassDiv isSuccess={isSuccess}>실패:{reason}</PassDiv>}
