@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-export const InputBoxContainer = styled.div`
+export const CommentInputLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   position: relative;
-  width: 100%;
   height: 128px;
   padding: 12px;
   border: 1px solid ${(props) => props.theme.colors.grey2};
@@ -13,7 +12,7 @@ export const InputBoxContainer = styled.div`
   background: ${(props) => props.theme.colors.grey4};
 `;
 
-export const InputBox = styled.textarea`
+export const CommentInputTextArea = styled.textarea`
   width: 100%;
   height: 100px;
   border: none;
@@ -27,11 +26,4 @@ export const InputBox = styled.textarea`
     color: ${(props) => props.theme.colors.grey1};
     opacity: 0.7;
   }
-`;
-
-export const ButtonWrapper = styled.div`
-  position: absolute;
-  right: 68%;
-  top: 78%;
-  transform: translateY(-50%);
 `;

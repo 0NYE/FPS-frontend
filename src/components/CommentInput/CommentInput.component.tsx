@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 
-import { InputBoxContainer, InputBox } from "./CommentInput.styles";
+import {
+  CommentInputLayout,
+  CommentInputTextArea,
+} from "./CommentInput.styles";
 
 import Button from "../Button/Button.component";
 
@@ -16,12 +19,15 @@ const CommentInput = ({ onSubmit }: CommentInputProps) => {
   };
 
   return (
-    <InputBoxContainer>
-      <InputBox placeholder="댓글을 입력하세요" ref={textArea}></InputBox>
+    <CommentInputLayout>
+      <CommentInputTextArea
+        placeholder="댓글을 입력하세요"
+        ref={textArea}
+      ></CommentInputTextArea>
       <Button variant="green" size="small" onClick={onClickHandler}>
         댓글 쓰기
       </Button>
-    </InputBoxContainer>
+    </CommentInputLayout>
   );
 };
 
