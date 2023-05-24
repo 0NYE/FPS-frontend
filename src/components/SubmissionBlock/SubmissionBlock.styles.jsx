@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-import { colors } from "@/style/theme";
 
 export const ResultBox= styled.div`
   display:flex;
   width:100%;
   height:100%;
   padding: 16px 8px;
-  background: ${({ isClick }) => (isClick ? `${colors.green}` : `${colors.grey4}`)};
+  background: ${({ isClick }) => (isClick ? `${isClick.theme.colors.green}` : `${isClick.theme.colors.grey4}`)};
   justify-content: space-between;
   align-items: center;
 `;
@@ -20,15 +19,15 @@ export const OverallDiv=styled.div`
 
 export const PassDiv=styled.div`
   font-weight:bold;
-  color:${({ isSuccess }) => (isSuccess ? `${colors.green}` : `${colors.red}`)}
+  color:${({ isSuccess }) => (isSuccess ? `${isSuccess.theme.colors.green}` : `${isSuccess.theme.colors.red}`)}
 `;
 
 export const TimeDiv=styled.div`
-  color:${colors.grey1}
+  color:${({props})=>props.themecolors.grey1}
 `;
 
 export const UserInform=styled.div`
-  color:${colors.grey1}
+  color:${({props})=>props.themecolors.grey1}
 `;
 
 export const ScoreWrap= styled.div`
@@ -44,4 +43,3 @@ export const ScoreDiv= styled.div`
   justify-content: center;
   align-items: center;
 `;
-

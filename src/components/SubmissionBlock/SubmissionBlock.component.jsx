@@ -24,58 +24,49 @@ const SubmissionBlock = ({
   metricScores,
   handleClick,
   isClick,
+  year,
+  month,
+  day,
+  hour,
+  min,
 }) => {
-  const currentDate = new Date();
-  const year = currentDate.getFullYear(); 
-  const month = currentDate.getMonth() + 1;
-  const day = currentDate.getDate();
-  const hour = currentDate.getHours();
-  const min = currentDate.getMinutes();
-  const calculateTotalScore = (metricScores) => {
-    let totalScore = 0;
-    Object.values(metricScores).forEach((score) => {
-      totalScore += score;
-    });
-    return totalScore;
-  };
+  const totalScore = Object.values(metricScores).reduce((totalScore, score) => totalScore + score);
   return (
-    <>
-      <ResultBox active={isClick} onClick={handleClick}>
-        <OverallDiv>
-          {isSuccess&&<PassDiv isSuccess={isSuccess}>통과</PassDiv>}
-          {!isSuccess&&<PassDiv isSuccess={isSuccess}>실패:{reason}</PassDiv>}
-          <TimeDiv>{year}-{month}-{day} {hour}:{min}</TimeDiv>
-          <UserInform>
-            <Avatar src={avatarURL} size="small"></Avatar>
-            {userName}
-          </UserInform>
-        </OverallDiv>
-        <ScoreWrap>
-          <ScoreDiv>
+    <ResultBox active={isClick} onClick={handleClick}>
+      <OverallDiv>
+        {isSuccess&&<PassDiv isSuccess={isSuccess}>통과</PassDiv>}
+        {!isSuccess&&<PassDiv isSuccess={isSuccess}>실패:{reason}</PassDiv>}
+        <TimeDiv>{year}-{month}-{day} {hour}:{min}</TimeDiv>
+        <UserInform>
+          <Avatar src={avatarURL} size="small"></Avatar>
+          {userName}
+        </UserInform>
+      </OverallDiv>
+      <ScoreWrap>
+        <ScoreDiv>
+          <CircleChart
+            score={totalScore}
+            perfectScore={perfectScore * Object.keys(metricScores).length}
+            size="medium"
+            animation={true}
+          />
+          총점
+        </ScoreDiv>
+
+        {Object.entries(metricScores).map(([evaluation, currentScore]) => (
+          <ScoreDiv key={evaluation}>
             <CircleChart
-              score={calculateTotalScore(metricScores)}
-              perfectScore={perfectScore * Object.keys(metricScores).length}
+              score={currentScore}
+              perfectScore={perfectScore}
               size="medium"
               animation={true}
             />
-            총점
+            {evaluation}
           </ScoreDiv>
-
-          {Object.entries(metricScores).map(([string, number]) => (
-            <ScoreDiv key={string}>
-              <CircleChart
-                score={number}
-                perfectScore={perfectScore}
-                size="medium"
-                animation={true}
-              />
-              {string}
-            </ScoreDiv>
-          ))}
-        </ScoreWrap>
-        <RightChevron />
-      </ResultBox>
-    </>
+        ))}
+      </ScoreWrap>
+      <RightChevron />
+    </ResultBox>
   );
 }
 
