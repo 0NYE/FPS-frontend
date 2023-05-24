@@ -19,7 +19,7 @@ const CommentInput = ({ onSubmit }: CommentInputProps) => {
     <InputBoxContainer>
       <InputBox placeholder="댓글을 입력하세요" ref={textArea}></InputBox>
       <Button variant="green" size="small" onClick={onClickHandler}>
-        댓글쓰기
+        댓글 쓰기
       </Button>
     </InputBoxContainer>
   );
