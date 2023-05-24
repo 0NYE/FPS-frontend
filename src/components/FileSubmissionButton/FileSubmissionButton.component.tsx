@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import {
-  FileSubmissionLayout,
-  FileSubmissionHeader,
-  FileSubmissionSvgBox,
+  FileSubmissionButtonLayout,
+  FileSubmissionButtonHeader,
+  FileSubmissionButtonSvgBox,
   FileInput,
-  FileLabel,
+  FileSubmissionButtonLabel,
   FileSubmissionFooter,
 } from "./FileSubmissionButton.styles";
 
@@ -22,6 +22,7 @@ const fileMIMEType: { [K in FileType]: string } = {
 
 interface FileSubmissionButtonProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
+  id: string;
   fileType?: FileType;
 }
 
@@ -51,18 +52,18 @@ const FileSubmissionButton = ({
   };
 
   return (
-    <FileSubmissionLayout isFileSubmitted={isFileSubmitted}>
-      <FileLabel htmlFor={id}>
-        <FileSubmissionHeader isFileSubmitted={isFileSubmitted}>
+    <FileSubmissionButtonLayout isFileSubmitted={isFileSubmitted}>
+      <FileSubmissionButtonLabel htmlFor={id}>
+        <FileSubmissionButtonHeader isFileSubmitted={isFileSubmitted}>
           {fileType || "파일"} 제출
-        </FileSubmissionHeader>
-        <FileSubmissionSvgBox>
+        </FileSubmissionButtonHeader>
+        <FileSubmissionButtonSvgBox>
           {isFileSubmitted ? <FileActivated /> : <File />}
-        </FileSubmissionSvgBox>
+        </FileSubmissionButtonSvgBox>
         <FileSubmissionFooter isFileSubmitted={isFileSubmitted}>
-          {selectedFileName && <p>{selectedFileName}</p>}
+          {selectedFileName}
         </FileSubmissionFooter>
-      </FileLabel>
+      </FileSubmissionButtonLabel>
       <FileInput
         {...props}
         id={id}
@@ -70,7 +71,7 @@ const FileSubmissionButton = ({
         accept={fileType ? fileMIMEType[fileType] : undefined}
         onChange={onChangeHandler}
       ></FileInput>
-    </FileSubmissionLayout>
+    </FileSubmissionButtonLayout>
   );
 };
 

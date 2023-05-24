@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 import { colors } from "@/style/theme";
 
-export const FileSubmissionLayout = styled.div<{ isFileSubmitted: boolean }>`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+export const FileSubmissionButtonLayout = styled.div<{
+  isFileSubmitted: boolean;
+}>`
   width: 150px;
-  height: 97px;
+  padding: 8px;
   border: 2px solid
     ${({ isFileSubmitted }) =>
       isFileSubmitted ? `${colors.green}` : `${colors.grey1}`};
@@ -15,35 +14,33 @@ export const FileSubmissionLayout = styled.div<{ isFileSubmitted: boolean }>`
   background-color: ${colors.grey4};
 `;
 
-export const FileSubmissionHeader = styled.div<{ isFileSubmitted: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
+export const FileSubmissionButtonHeader = styled.div<{
+  isFileSubmitted: boolean;
+}>`
   color: ${({ isFileSubmitted }) =>
     isFileSubmitted ? `${colors.green}` : `${colors.grey1}`};
+  font-weight: 700;
+  font-size: 16px;
 `;
 
-export const FileSubmissionSvgBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+export const FileSubmissionButtonSvgBox = styled.div`
   & > svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
 export const FileSubmissionFooter = styled.div<{ isFileSubmitted: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: ${({ isFileSubmitted }) =>
     isFileSubmitted ? `${colors.green}` : `${colors.grey1}`};
+  font-size: 14px;
 `;
 
-export const FileLabel = styled.label`
+export const FileSubmissionButtonLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   width: 100%;
   height: 100%;
 `;
@@ -53,8 +50,6 @@ export const FileButton = styled.button`
   height: 100%;
 `;
 
-export const FileInput = styled.input.attrs({
-  type: "file",
-})`
+export const FileInput = styled.input`
   display: none;
 `;
