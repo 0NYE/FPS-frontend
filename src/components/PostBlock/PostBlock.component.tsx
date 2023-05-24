@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import {
   PostBlockDataSpan,
   PostBox,
@@ -27,41 +25,43 @@ import { ReactComponent as StarActivated } from "@/assets/images/star_activated.
 
 interface PostBlockProps {
   id: string;
-  userName: string;
   title: string;
-  isBookmark: boolean;
-  isLike: boolean;
-  isDislike: boolean;
+  userName: string;
+  date: Date;
+  isBookmark?: boolean;
+  isLike?: boolean;
+  isDislike?: boolean;
   bookmarkCount: number;
   likeCount: number;
   dislikeCount: number;
   commentCount: number;
-  isActive: boolean;
-  onClick: (id: string) => void;
+  isActive?: boolean;
+  onClick?: (id: string) => void;
 }
 
 const PostBlock = ({
   id,
-  userName,
   title,
-  isBookmark,
-  isLike,
-  isDislike,
+  userName,
+  date,
+  isBookmark = false,
+  isLike = false,
+  isDislike = false,
   bookmarkCount,
   likeCount,
   dislikeCount,
   commentCount,
-  isActive,
+  isActive = false,
   onClick,
 }: PostBlockProps) => {
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth() + 1;
-  const day = currentDate.getDate();
-  const hour = currentDate.getHours();
-  const min = currentDate.getMinutes();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const min = date.getMinutes();
+
   return (
-    <PostBox active={isActive} onClick={() => onClick(id)}>
+    <PostBox active={isActive} onClick={() => onClick && onClick(id)}>
       <PostDiv>
         <AvatarDiv>
           <Avatar size={"small"} />
@@ -71,24 +71,24 @@ const PostBlock = ({
             <PostTitle>{title}</PostTitle>
           </PostHeader>
           <NameTimeDiv>
-            <NameTimeSpan active={isActive} onClick={handleClick}>
+            <NameTimeSpan active={isActive}>
               {userName} {year}-{month}-{day} {hour}:{min}
             </NameTimeSpan>
           </NameTimeDiv>
           <PostBlockTagBox>
-            <PostBlockDataSpan active={isActive} onClick={handleClick}>
+            <PostBlockDataSpan active={isActive}>
               {isBookmark ? <StarActivated /> : <Star />}
               {bookmarkCount}
             </PostBlockDataSpan>
-            <PostBlockDataSpan active={isActive} onClick={handleClick}>
+            <PostBlockDataSpan active={isActive}>
               {isLike ? <LikeActivated /> : <Like />}
               {likeCount}
             </PostBlockDataSpan>
-            <PostBlockDataSpan active={isActive} onClick={handleClick}>
+            <PostBlockDataSpan active={isActive}>
               {isDislike ? <DislikeActivated /> : <Dislike />}
               {dislikeCount}
             </PostBlockDataSpan>
-            <PostBlockDataSpan active={isActive} onClick={handleClick}>
+            <PostBlockDataSpan active={isActive}>
               <Comment />
               {commentCount}
             </PostBlockDataSpan>
