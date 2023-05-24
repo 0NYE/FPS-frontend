@@ -25,9 +25,9 @@ export const PostTitle = styled.div`
 `;
 
 export const PostDiv = styled.div`
-  display:flex;
-  align-items: center
-  flex-direction:row;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 `;
 
 export const NameTimeDiv = styled.div`
