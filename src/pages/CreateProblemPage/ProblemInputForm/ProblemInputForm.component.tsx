@@ -17,9 +17,9 @@ import {
   ProblemInputFormTitleInput,
   ProblemInputFormTagList,
 } from "@/pages/CreateProblemPage/ProblemInputForm/ProblemInputForm.styles";
+import { readText } from "@/utils/readText";
 
-
-
+const fileReader = new FileReader();
 
 const ProblemInputForm = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -67,16 +67,23 @@ const ProblemInputForm = () => {
   };
 
   const problemSubmitHandler = async () => {
-    const fileReader = new FileReader();
+    console.log({
+      title: titleInput.value,
+      description: descriptionTextArea.value,
+      tags,
+      html_code: htmlFile ? await readText(htmlFile) : "",
+      css_code: cssFile ? await readText(cssFile) : "",
+      js_code: jsFile ? await readText(jsFile) : "",
+    });
     const response = await fetch(`http://${domain}/problems`, {
       method: "POST",
       body: JSON.stringify({
         title: titleInput.value,
         description: descriptionTextArea.value,
         tags,
-        html_code: htmlFile ? fileReader.readAsText(htmlFile, "utf-8") : "",
-        css_code: cssFile ? fileReader.readAsText(cssFile, "utf-8") : "",
-        js_code: jsFile ? fileReader.readAsText(jsFile, "utf-8") : "",
+        html_code: htmlFile ? await readText(htmlFile) : "",
+        css_code: cssFile ? await readText(cssFile) : "",
+        js_code: jsFile ? await readText(jsFile) : "",
       }),
     });
 
