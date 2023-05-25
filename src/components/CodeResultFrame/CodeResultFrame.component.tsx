@@ -1,12 +1,16 @@
 import { CodeResultFrameLayout } from "@/components/CodeResultFrame/CodeResultFrame.styles";
 
 interface CodeResultFrameProps {
-  html: string;
-  css: string;
-  js: string;
+  html?: string;
+  css?: string;
+  js?: string;
 }
 
-const CodeResultFrame = ({ html, css, js }: CodeResultFrameProps) => {
+const CodeResultFrame = ({
+  html = "",
+  css = "",
+  js = "",
+}: CodeResultFrameProps) => {
   const resultSourceCode = `
     <html>
       <body>${html}</body>
