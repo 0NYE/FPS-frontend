@@ -1,6 +1,9 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useAtom } from "jotai";
+
+import { htmlAtom, cssAtom, jsAtom } from "@/atoms/code";
 import Button from "@/components/Button/Button.component";
 import FileSubmissionButton from "@/components/FileSubmissionButton/FileSubmissionButton.component";
 import Tag from "@/components/Tag/Tag.component";
@@ -17,9 +20,8 @@ import {
   ProblemInputFormTitleInput,
   ProblemInputFormTagList,
 } from "@/pages/CreateProblemPage/ProblemInputForm/ProblemInputForm.styles";
-import { readText } from "@/utils/readText";
+import { readTextFromFile } from "@/utils/readTextFromFile";
 
-const fileReader = new FileReader();
 
 const ProblemInputForm = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -27,9 +29,9 @@ const ProblemInputForm = () => {
   const tagInput = useInput("");
   const descriptionTextArea = useTextArea("");
   const [tags, setTags] = useState<string[]>([]);
-  const [htmlFile, setHtmlFile] = useState<File | null>(null);
-  const [cssFile, setCssFile] = useState<File | null>(null);
-  const [jsFile, setJsFile] = useState<File | null>(null);
+  const [htmlCode, setHtmlCode] = useAtom(htmlAtom);
+  const [cssCode, setCssCode] = useAtom(htmlAtom);
+  const [jsCode, setJsCode] = useAtom(htmlAtom);
   const navigate = useNavigate();
 
   const formSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
@@ -45,45 +47,37 @@ const ProblemInputForm = () => {
     setTags(tags.filter((tag) => tag !== targetTag));
   };
 
-  const htmlInputChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
-    e
-  ) => {
+  const htmlInputChangeHandler: React.ChangeEventHandler<
+    HTMLInputElement
+  > = async (e) => {
     if (!e.target.files) return;
-    setHtmlFile(e.target.files[0]);
+    setHtmlCode(await readTextFromFile(e.target.files[0]));
   };
 
-  const cssInputChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
-    e
-  ) => {
+  const cssInputChangeHandler: React.ChangeEventHandler<
+    HTMLInputElement
+  > = async (e) => {
     if (!e.target.files) return;
-    setCssFile(e.target.files[0]);
+    setCssCode(await readTextFromFile(e.target.files[0]));
   };
 
-  const jsInputChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
-    e
-  ) => {
+  const jsInputChangeHandler: React.ChangeEventHandler<
+    HTMLInputElement
+  > = async (e) => {
     if (!e.target.files) return;
-    setJsFile(e.target.files[0]);
+    setJsCode(await readTextFromFile(e.target.files[0]));
   };
 
   const problemSubmitHandler = async () => {
-    console.log({
-      title: titleInput.value,
-      description: descriptionTextArea.value,
-      tags,
-      html_code: htmlFile ? await readText(htmlFile) : "",
-      css_code: cssFile ? await readText(cssFile) : "",
-      js_code: jsFile ? await readText(jsFile) : "",
-    });
     const response = await fetch(`http://${domain}/problems`, {
       method: "POST",
       body: JSON.stringify({
         title: titleInput.value,
         description: descriptionTextArea.value,
         tags,
-        html_code: htmlFile ? await readText(htmlFile) : "",
-        css_code: cssFile ? await readText(cssFile) : "",
-        js_code: jsFile ? await readText(jsFile) : "",
+        html_code: htmlCode,
+        css_code: cssCode,
+        js_code: jsCode,
       }),
     });
 
