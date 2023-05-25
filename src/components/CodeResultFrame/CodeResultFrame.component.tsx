@@ -1,6 +1,7 @@
 import { CodeResultFrameLayout } from "@/components/CodeResultFrame/CodeResultFrame.styles";
 
-interface CodeResultFrameProps {
+interface CodeResultFrameProps
+  extends React.IframeHTMLAttributes<HTMLIFrameElement> {
   html?: string;
   css?: string;
   js?: string;
@@ -10,6 +11,7 @@ const CodeResultFrame = ({
   html = "",
   css = "",
   js = "",
+  ...props
 }: CodeResultFrameProps) => {
   const resultSourceCode = `
     <html>
@@ -27,6 +29,7 @@ const CodeResultFrame = ({
         sandbox="allow-scripts"
         width="100%"
         height="100%"
+        {...props}
       />
     </CodeResultFrameLayout>
   );
