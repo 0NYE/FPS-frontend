@@ -12,10 +12,10 @@ const ProblemPageMenu = () => {
       <nav>
         <ProblemPageMenuList>
           <li>
-            <ProblemPageMenuLink to={`description`}>문제</ProblemPageMenuLink>
+            <ProblemPageMenuLink to="solve">문제</ProblemPageMenuLink>
           </li>
           <li>
-            <ProblemPageMenuLink to={`submissions`}>
+            <ProblemPageMenuLink to="submissions">
               제출 기록
             </ProblemPageMenuLink>
           </li>
