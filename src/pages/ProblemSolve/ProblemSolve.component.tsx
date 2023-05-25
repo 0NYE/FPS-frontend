@@ -29,6 +29,7 @@ import {
 } from "@/pages/ProblemSolve/ProblemSolve.styles";
 import { colors } from "@/style/theme";
 import { ProblemDetailInformation } from "@/types/problem";
+import { iframeToPNG } from "@/utils/html2canvas";
 
 type Languages = "html" | "css" | "javascript";
 
@@ -43,6 +44,7 @@ const ProblemSolve = () => {
   const [js, setJs] = useAtom(jsAtom);
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const changeFlag = useRef(false);
+  const [simillarity, setSimillarity] = useState(0);
 
   const langButtonClickHandler: React.MouseEventHandler<HTMLDivElement> = (
     e
@@ -62,12 +64,41 @@ const ProblemSolve = () => {
     editorRef.current = editor;
   };
 
+  const captureOriginalCodeResult = () => {
+    const problemIframe = document.querySelector(
+      "#problem-iframe"
+    ) as HTMLIFrameElement;
+
+    return iframeToPNG(problemIframe, "original");
+  };
+
+  const captureUserCodeResult = () => {
+    const problemIframe = document.querySelector(
+      "#user-code-iframe"
+    ) as HTMLIFrameElement;
+    return iframeToPNG(problemIframe, "user");
+  };
+
+  const fetchSimillarity = async () => {
+    const formData = new FormData();
+    formData.append("problem", await captureOriginalCodeResult());
+    formData.append("submit", await captureUserCodeResult());
+    const json = await fetch(`http://${domain}/compare`, {
+      method: "POST",
+      body: formData,
+    }).then((res) => res.json());
+
+    setSimillarity(json?.score ? json.score * 100 : 0);
+  };
+
   const editorChangeHandler = (code: string | undefined) => {
     if (!code || changeFlag.current) return;
 
     if (currentLanguage === "html") setHtml(code);
     else if (currentLanguage === "css") setCss(code);
     else if (currentLanguage === "javascript") setJs(code);
+
+    fetchSimillarity();
   };
 
   return (
@@ -80,6 +111,7 @@ const ProblemSolve = () => {
               <ProblemDescription>{problem.description}</ProblemDescription>
               <ProblemRenderBox>
                 <CodeResultFrame
+                  id="problem-iframe"
                   html={problem.HTML_code}
                   css={problem.CSS_code}
                   js={problem.JS_code}
@@ -130,12 +162,20 @@ const ProblemSolve = () => {
               </EditorBox>
               <UserCodeRenderBoxWrapper>
                 <UserCodeRenderBox>
-                  <CodeResultFrame html={html} css={css} js={js} />
+                  <CodeResultFrame
+                    id="user-code-iframe"
+                    html={html}
+                    css={css}
+                    js={js}
+                  />
                 </UserCodeRenderBox>
               </UserCodeRenderBoxWrapper>
               <SubmissionControlBox>
                 <ProgressBarBox>
-                  <ProgressBar value={50} label="유사도: 50%" />
+                  <ProgressBar
+                    value={simillarity}
+                    label={`유사도: ${simillarity}%`}
+                  />
                 </ProgressBarBox>
                 <Button variant="green">제출</Button>
               </SubmissionControlBox>
