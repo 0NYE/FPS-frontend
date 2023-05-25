@@ -17,6 +17,6 @@ export interface ProblemDetailInformation {
   title: string;
   description: string;
   htmlCode: string;
-  csCode: string;
+  cssCode: string;
   jsCode: string;
 }
