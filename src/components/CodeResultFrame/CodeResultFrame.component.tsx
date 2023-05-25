@@ -26,7 +26,7 @@ const CodeResultFrame = ({
       <iframe
         srcDoc={resultSourceCode}
         title="output"
-        sandbox="allow-scripts"
+        sandbox="allow-same-origin"
         width="100%"
         height="100%"
         {...props}
