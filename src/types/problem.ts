@@ -14,6 +14,7 @@ export interface Problem {
 }
 
 export interface ProblemDetailInformation {
+  title: string;
   description: string;
   htmlCode: string;
   csCode: string;
