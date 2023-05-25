@@ -4,7 +4,7 @@ export const ProblemBlockLayout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 600px;
+  width: 100%;
   padding: 16px 16px;
   background-color: ${(props) => props.theme.colors.grey4};
   color: ${(props) => props.theme.colors.black};
