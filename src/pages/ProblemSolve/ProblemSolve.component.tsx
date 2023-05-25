@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
+import Editor, { OnMount } from "@monaco-editor/react";
+import { useAtom } from "jotai";
+import { editor } from "monaco-editor";
 
+import { htmlAtom, cssAtom, jsAtom } from "@/atoms/code";
 import Button from "@/components/Button/Button.component";
 import CodeResultFrame from "@/components/CodeResultFrame/CodeResultFrame.component";
 import ProgressBar from "@/components/ProgressBar/ProgressBar.components";
@@ -17,19 +20,55 @@ import {
   ProblemTipParagraph,
   SolveSectionLayout,
   EditorControlBox,
+  LanguageButton,
   EditorBox,
   UserCodeRenderBoxWrapper,
   UserCodeRenderBox,
   SubmissionControlBox,
   ProgressBarBox,
 } from "@/pages/ProblemSolve/ProblemSolve.styles";
+import { colors } from "@/style/theme";
 import { ProblemDetailInformation } from "@/types/problem";
+
+type Languages = "html" | "css" | "javascript";
 
 const ProblemSolve = () => {
   const { problem_id } = useParams();
   const { data: problem } = useFetch<ProblemDetailInformation>(
     `http://${domain}/problems/${problem_id}`
   );
+  const [currentLanguage, setCurrentLanguage] = useState<Languages>("html");
+  const [html, setHtml] = useAtom(htmlAtom);
+  const [css, setCss] = useAtom(cssAtom);
+  const [js, setJs] = useAtom(jsAtom);
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const changeFlag = useRef(false);
+
+  const langButtonClickHandler: React.MouseEventHandler<HTMLDivElement> = (
+    e
+  ) => {
+    const language = (e.target as HTMLElement).dataset.lang;
+    if (!language) return;
+    setCurrentLanguage(language as Languages);
+
+    changeFlag.current = true;
+    if (language === "html") editorRef.current?.setValue(html);
+    else if (language === "css") editorRef.current?.setValue(css);
+    else if (language === "javascript") editorRef.current?.setValue(js);
+    changeFlag.current = false;
+  };
+
+  const editorMountHandler: OnMount = (editor) => {
+    editorRef.current = editor;
+  };
+
+  const editorChangeHandler = (code: string | undefined) => {
+    if (!code || changeFlag.current) return;
+
+    if (currentLanguage === "html") setHtml(code);
+    else if (currentLanguage === "css") setCss(code);
+    else if (currentLanguage === "javascript") setJs(code);
+  };
 
   return (
     <>
@@ -53,7 +92,29 @@ const ProblemSolve = () => {
           }
           rightChildren={
             <SolveSectionLayout>
-              <EditorControlBox></EditorControlBox>
+              <EditorControlBox onClick={langButtonClickHandler}>
+                <LanguageButton
+                  color={colors.htmlTheme}
+                  data-lang="html"
+                  active={currentLanguage === "html"}
+                >
+                  HTML
+                </LanguageButton>
+                <LanguageButton
+                  color={colors.cssTheme}
+                  data-lang="css"
+                  active={currentLanguage === "css"}
+                >
+                  CSS
+                </LanguageButton>
+                <LanguageButton
+                  color={colors.jsTheme}
+                  data-lang="javascript"
+                  active={currentLanguage === "javascript"}
+                >
+                  JavaScript
+                </LanguageButton>
+              </EditorControlBox>
               <EditorBox>
                 <Editor
                   defaultLanguage="html"
@@ -61,12 +122,15 @@ const ProblemSolve = () => {
                   options={{
                     minimap: { enabled: false },
                     scrollbar: { vertical: "auto", horizontal: "auto" },
+                    lineNumbersMinChars: 3,
                   }}
+                  onMount={editorMountHandler}
+                  onChange={editorChangeHandler}
                 />
               </EditorBox>
               <UserCodeRenderBoxWrapper>
                 <UserCodeRenderBox>
-                  <CodeResultFrame />
+                  <CodeResultFrame html={html} css={css} js={js} />
                 </UserCodeRenderBox>
               </UserCodeRenderBoxWrapper>
               <SubmissionControlBox>

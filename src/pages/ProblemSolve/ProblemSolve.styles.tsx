@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ProblemSectionLayout = styled.div`
   display: flex;
@@ -40,21 +40,38 @@ export const SolveSectionLayout = styled.div`
 `;
 
 export const EditorControlBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
   position: absolute;
   top: 0;
   left: 0;
   transform: translateY(-100%);
   width: 100%;
-  height: 32px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  height: 36px;
+  padding: 0 8px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   background-color: ${(props) => props.theme.colors.white};
+`;
+
+export const LanguageButton = styled.button<{
+  color?: string;
+  active?: boolean;
+}>`
+  padding: 4px 8px;
+  border: 1px solid ${(props) => props.color};
+  border-radius: 3px;
+  background-color: ${(props) => (props.active ? props.color : "transparent")};
+  color: ${(props) => (props.active ? props.theme.colors.white : props.color)};
+  font-size: 13px;
+  cursor: pointer;
 `;
 
 export const EditorBox = styled.div`
   flex-grow: 1;
   margin-bottom: 8px;
-  padding-top: 8px;
+  padding: 8px 0 0 4px;
   border-top: 1px solid ${(props) => props.theme.colors.grey3};
 `;
 
