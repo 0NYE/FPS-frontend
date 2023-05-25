@@ -1,5 +1,5 @@
-export const readText = (file: File) => {
-  return new Promise((resolve, reject) => {
+export const readTextFromFile = (file: File) => {
+  return new Promise<string>((resolve, reject) => {
     try {
       const reader = new FileReader();
       reader.onload = () => {
