@@ -1,5 +1,6 @@
 import {
   ProgressBarLayout,
+  BackgroundBar,
   InnerBar,
 } from "@/components/ProgressBar/ProgressBar.styles";
 
@@ -23,6 +24,7 @@ const ProgressBar = ({
   const percentage = ((value - min) / (max - min)) * 100;
   return (
     <ProgressBarLayout>
+      <BackgroundBar color={color} />
       <InnerBar percentage={percentage} color={color} animated={animated}>
         {label}
       </InnerBar>
