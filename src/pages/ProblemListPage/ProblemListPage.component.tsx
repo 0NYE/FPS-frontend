@@ -43,7 +43,7 @@ const ProblemListPage = () => {
                 isJs && languages.push("JS");
 
                 return (
-                  <li key={id} onClick={() => navigate(`/problem-solve/${id}`)}>
+                  <li key={id} onClick={() => navigate(`/problems/${id}`)}>
                     <ProblemBlock
                       title={title}
                       isSuccess={undefined}

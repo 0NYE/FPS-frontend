@@ -18,6 +18,10 @@ export const colors = {
   lightRed: "#FFD0CE",
   lightGreen: "#CCF5D2",
   lightOrange: "#FFE7C2",
+
+  htmlTheme: "#F75421",
+  cssTheme: "#254BDD",
+  jsTheme: "#FFCC02",
 };
 
 export const shadows = {

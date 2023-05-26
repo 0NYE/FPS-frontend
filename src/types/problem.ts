@@ -14,8 +14,9 @@ export interface Problem {
 }
 
 export interface ProblemDetailInformation {
+  title: string;
   description: string;
-  htmlCode: string;
-  csCode: string;
-  jsCode: string;
+  HTML_code: string;
+  CSS_code: string;
+  JS_code: string;
 }
