@@ -2,6 +2,7 @@ import React from "react";
 
 import { useAtom } from "jotai";
 
+import { loginModalActiveAtom } from "@/atoms/modal";
 import { userAtom } from "@/atoms/user";
 import Button from "@/components/Button/Button.component";
 import LabeledInput from "@/components/LabeledInput/LabeledInput.component";
@@ -13,6 +14,7 @@ const LoginForm = () => {
   const idInput = useInput("");
   const passwordInput = useInput("");
   const [user, setUser] = useAtom(userAtom);
+  const [loginModalActive, setLoginModalActive] = useAtom(loginModalActiveAtom);
 
   const buttonClickHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
     fetch(`${domain}/auth/login`, {
@@ -25,6 +27,7 @@ const LoginForm = () => {
       .then((response) => {
         alert("로그인에 성공했습니다.");
         setUser(true);
+        setLoginModalActive(false);
         console.log("login success!");
       })
       .catch((err) => {

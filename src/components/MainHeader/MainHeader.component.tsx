@@ -1,8 +1,13 @@
+import { useAtom } from "jotai";
+
+import { loginModalActiveAtom } from "@/atoms/modal";
+import { userAtom } from "@/atoms/user";
+import Avatar from "@/components/Avatar/Avatar.component";
 import Logo from "@/components/Logo/Logo.component";
 import {
   MainHeaderLayout,
   MainHeaderRightRow,
-  MainHeaderLoginLink,
+  MainHeaderLoginButton,
   MainHeaderNav,
   MainHeaderNavList,
   MainHeaderNavListItem,
@@ -10,6 +15,13 @@ import {
 } from "@/components/MainHeader/MainHeader.styles";
 
 const MainHeader = () => {
+  const [loginModalActive, setLoginModalActive] = useAtom(loginModalActiveAtom);
+  const [user] = useAtom(userAtom);
+
+  const loginButtonClickHandler = () => {
+    setLoginModalActive(true);
+  };
+
   return (
     <MainHeaderLayout>
       <MainHeaderRightRow>
@@ -27,7 +39,13 @@ const MainHeader = () => {
           </MainHeaderNavList>
         </MainHeaderNav>
       </MainHeaderRightRow>
-      <MainHeaderLoginLink to="/login">로그인</MainHeaderLoginLink>
+      {!user ? (
+        <MainHeaderLoginButton onClick={loginButtonClickHandler}>
+          로그인
+        </MainHeaderLoginButton>
+      ) : (
+        <Avatar size="small" />
+      )}
     </MainHeaderLayout>
   );
 };

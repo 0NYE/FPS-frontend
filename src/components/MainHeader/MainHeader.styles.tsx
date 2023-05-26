@@ -42,8 +42,16 @@ export const MainHeaderRightRow = styled.div`
   height: 100%;
 `;
 
-export const MainHeaderLoginLink = styled(Link)`
+export const MainHeaderLoginButton = styled.button`
+  border: none;
+  background-color: transparent;
   color: ${(props) => props.theme.colors.grey1};
+  cursor: pointer;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.black};
+  }
 `;
 
 export const MainHeaderLayout = styled.header`

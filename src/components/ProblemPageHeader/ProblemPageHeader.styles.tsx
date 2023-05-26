@@ -12,6 +12,18 @@ export const ProblemPageHeaderLayout = styled.header`
   font-size: 16px;
 `;
 
+export const ProblemPageHeaderLoginButton = styled.button`
+  border: none;
+  background-color: transparent;
+  color: ${(props) => props.theme.colors.grey1};
+  cursor: pointer;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.black};
+  }
+`;
+
 export const ProblemPageHeaderNavLink = styled(NavLink)`
   font-size: 16x;
   font-weight: 700;
