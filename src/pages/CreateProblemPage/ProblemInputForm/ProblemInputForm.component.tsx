@@ -22,7 +22,6 @@ import {
 } from "@/pages/CreateProblemPage/ProblemInputForm/ProblemInputForm.styles";
 import { readTextFromFile } from "@/utils/readTextFromFile";
 
-
 const ProblemInputForm = () => {
   const form = useRef<HTMLFormElement>(null);
   const titleInput = useInput("");
@@ -30,8 +29,8 @@ const ProblemInputForm = () => {
   const descriptionTextArea = useTextArea("");
   const [tags, setTags] = useState<string[]>([]);
   const [htmlCode, setHtmlCode] = useAtom(htmlAtom);
-  const [cssCode, setCssCode] = useAtom(htmlAtom);
-  const [jsCode, setJsCode] = useAtom(htmlAtom);
+  const [cssCode, setCssCode] = useAtom(cssAtom);
+  const [jsCode, setJsCode] = useAtom(jsAtom);
   const navigate = useNavigate();
 
   const formSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
@@ -71,6 +70,9 @@ const ProblemInputForm = () => {
   const problemSubmitHandler = async () => {
     const response = await fetch(`http://${domain}/problems`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         title: titleInput.value,
         description: descriptionTextArea.value,
