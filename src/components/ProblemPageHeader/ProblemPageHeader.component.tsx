@@ -1,20 +1,29 @@
+import { useAtom } from "jotai";
+
+import { loginModalActiveAtom } from "@/atoms/modal";
 import Logo from "@/components/Logo/Logo.component";
 import {
   ProblemPageHeaderLayout,
-  ProblemPageHeaderLoginLink,
+  ProblemPageHeaderLoginButton,
   ProblemPageHeaderNavLink,
 } from "@/components/ProblemPageHeader/ProblemPageHeader.styles";
 
 const ProblemPageHeader = () => {
+  const [loginModalActive, setLoginModalActive] = useAtom(loginModalActiveAtom);
+
+  const loginButtonClickHandler = () => {
+    setLoginModalActive(true);
+  };
+
   return (
     <ProblemPageHeaderLayout>
       <Logo />
       <ProblemPageHeaderNavLink to="/problems">
         문제 리스트
       </ProblemPageHeaderNavLink>
-      <ProblemPageHeaderLoginLink to="/login">
+      <ProblemPageHeaderLoginButton onClick={loginButtonClickHandler}>
         로그인
-      </ProblemPageHeaderLoginLink>
+      </ProblemPageHeaderLoginButton>
     </ProblemPageHeaderLayout>
   );
 };
