@@ -122,6 +122,7 @@ const ProblemInputForm = () => {
       <ProblemInputFormTitleInput
         value={title}
         onChange={titleInputHandler}
+        autoFocus
         placeholder="문제 제목을 입력하세요."
       />
       <ProblemInputFormTagInputBox>

@@ -9,6 +9,8 @@ export const ProblemSectionLayout = styled.div`
 `;
 
 export const ProblemTextSection = styled.section`
+  display: flex;
+  flex-direction: column;
   flex: 1 1 0;
   overflow: auto;
 `;

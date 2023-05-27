@@ -27,8 +27,8 @@ const CreateProblemPage = () => {
           leftChildren={<ProblemInputForm />}
           rightChildren={
             <ProblemSection
-              title={title}
-              tags={tags}
+              title={title || "생성될 문제 미리보기"}
+              tags={tags.length ? tags : ["예시 태그1", "예시 태그2"]}
               descriptionMarkdown={description}
               htmlCode={htmlCode}
               cssCode={cssCode}

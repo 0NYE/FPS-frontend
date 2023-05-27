@@ -1,5 +1,7 @@
 import { atom } from "jotai";
 
+import { defaultCreateProblemMarkdown } from "@/constants/markdown";
+
 export const problemCreateInfoAtom = atom<{
   title: string;
   tags: string[];
@@ -10,7 +12,7 @@ export const problemCreateInfoAtom = atom<{
 }>({
   title: "",
   tags: [],
-  description: "",
+  description: defaultCreateProblemMarkdown,
   htmlCode: "",
   cssCode: "",
   jsCode: "",
