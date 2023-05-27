@@ -33,6 +33,7 @@ const CreateProblemPage = () => {
               htmlCode={htmlCode}
               cssCode={cssCode}
               jsCode={jsCode}
+              tipText="html을 제출해도 미리보기가 작동하지 않는다면, <body>의 내용물만 넣어보세요!"
             />
           }
         />
