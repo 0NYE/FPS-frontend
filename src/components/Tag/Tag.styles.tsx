@@ -4,6 +4,7 @@ import { TagSize } from "@/components/Tag/Tag.component";
 
 export const TagLayout = styled.div<{ size: TagSize }>`
   display: flex;
+  align-items: center;
   border-radius: 999px;
   background-color: ${(props) => props.theme.colors.grey3 + "88"};
   transition: background-color 200ms ease;
@@ -27,9 +28,13 @@ export const TagLayout = styled.div<{ size: TagSize }>`
 `;
 
 export const TagDeleteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 16px;
+  padding: 0 6px;
   margin-right: -6px;
   background-color: transparent;
-  font-size: 10px;
   color: ${(props) => props.theme.colors.black};
   font-weight: 700;
   border: none;
