@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useAtom } from "jotai";
 import { ThemeProvider } from "styled-components";
@@ -10,8 +12,6 @@ import ProblemListPage from "@/pages/ProblemListPage/ProblemListPage.component";
 import ProblemPage from "@/pages/ProblemPage/ProblemPage.component";
 import GlobalStyles from "@/style/GlobalStyles";
 import { theme } from "@/style/theme";
-
-
 
 function App() {
   const [loginModalActive, setLoginModalActive] = useAtom(loginModalActiveAtom);
@@ -26,8 +26,16 @@ function App() {
       </Routes>
       <LoginModal
         isOpen={loginModalActive}
-        onRequestClose={() => setLoginModalActive(false)}
+        closeHandler={() => setLoginModalActive(false)}
       ></LoginModal>
+      <ToastContainer
+        position="top-center"
+        autoClose={4500}
+        newestOnTop={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        theme="light"
+      />
       <GlobalStyles />
     </ThemeProvider>
   );

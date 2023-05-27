@@ -10,7 +10,6 @@ interface ButtonProps
     ButtonLayoutProps {}
 
 const Button = (props: ButtonProps) => {
-  console.log(props.size);
   return <ButtonLayout {...props}></ButtonLayout>;
 };
 
