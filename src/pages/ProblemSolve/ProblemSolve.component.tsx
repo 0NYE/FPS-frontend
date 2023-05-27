@@ -8,16 +8,12 @@ import { editor } from "monaco-editor";
 import { htmlAtom, cssAtom, jsAtom } from "@/atoms/code";
 import Button from "@/components/Button/Button.component";
 import CodeResultFrame from "@/components/CodeResultFrame/CodeResultFrame.component";
+import ProblemSection from "@/components/ProblemSection/ProblemSection.components";
 import ProgressBar from "@/components/ProgressBar/ProgressBar.components";
 import TwoVerticalSection from "@/components/TwoVerticalSection/TwoVerticalSection.component";
 import { domain } from "@/constants/api";
 import { useFetch } from "@/hooks/useFetch";
 import {
-  ProblemSectionLayout,
-  ProblemTitle,
-  ProblemDescription,
-  ProblemRenderBox,
-  ProblemTipParagraph,
   SolveSectionLayout,
   EditorControlBox,
   LanguageButton,
@@ -106,21 +102,15 @@ const ProblemSolve = () => {
       {problem ? (
         <TwoVerticalSection
           leftChildren={
-            <ProblemSectionLayout>
-              <ProblemTitle>{`${problem_id}. ${problem.title}`}</ProblemTitle>
-              <ProblemDescription>{problem.description}</ProblemDescription>
-              <ProblemRenderBox>
-                <CodeResultFrame
-                  id="problem-iframe"
-                  html={problem.HTML_code}
-                  css={problem.CSS_code}
-                  js={problem.JS_code}
-                />
-              </ProblemRenderBox>
-              <ProblemTipParagraph>
-                잘 모르겠다면 브라우저 개발자 도구를 활용해보세요!
-              </ProblemTipParagraph>
-            </ProblemSectionLayout>
+            <ProblemSection
+              id={problem_id ?? ""}
+              title={problem.title}
+              descriptionMarkdown={problem.description}
+              htmlCode={problem.HTML_code}
+              cssCode={problem.CSS_code}
+              jsCode={problem.JS_code}
+              tipText="잘 모르겠다면 브라우저 개발자 도구를 활용해보세요!"
+            />
           }
           rightChildren={
             <SolveSectionLayout>
