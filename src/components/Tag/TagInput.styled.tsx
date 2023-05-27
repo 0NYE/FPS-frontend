@@ -6,6 +6,7 @@ export const TagInputLayout = styled.div<{ size: TagSize }>`
   position: relative;
   border-radius: 999px;
   background-color: ${(props) => props.theme.colors.grey3 + "88"};
+  outline: none;
 
   ${({ size }) =>
     ({

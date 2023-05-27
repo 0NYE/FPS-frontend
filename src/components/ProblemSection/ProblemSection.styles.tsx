@@ -3,19 +3,26 @@ import styled from "styled-components";
 export const ProblemSectionLayout = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 11px;
   height: 100%;
   padding: 16px 16px 0 16px;
+`;
+
+export const ProblemTextSection = styled.section`
+  flex: 1 1 0;
+  overflow: auto;
 `;
 
 export const ProblemTitle = styled.h2`
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `;
 
-export const ProblemDescription = styled.p`
-  font-size: 14px;
-  height: 100%;
+export const ProblemTagList = styled.ul`
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
 `;
 
 export const ProblemRenderBox = styled.div`
@@ -24,7 +31,7 @@ export const ProblemRenderBox = styled.div`
 `;
 
 export const ProblemTipParagraph = styled.p`
-  min-height: 48px;
+  height: 48px;
   line-height: 48px;
   font-size: 12px;
   color: ${(props) => props.theme.colors.grey1};

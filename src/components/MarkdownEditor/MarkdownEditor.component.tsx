@@ -1,5 +1,3 @@
-import React from "react";
-
 // eslint-disable-next-line import/named
 import MDEditor, { MDEditorProps } from "@uiw/react-md-editor";
 
@@ -9,13 +7,13 @@ const MarkdownEditor = ({ value, onChange }: MDEditorProps) => {
   return (
     <MarkdownEditorLayout>
       <MDEditor
-        value={"ASD"}
+        value={value}
         onChange={onChange}
         preview="edit"
         visibleDragbar={false}
         fullscreen={false}
-        height={"100%"}
         extraCommands={[]}
+        style={{ minHeight: "100%" }}
       ></MDEditor>
     </MarkdownEditorLayout>
   );

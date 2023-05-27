@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const inputStyle = css`
   width: 100%;
-  padding: 12px 20px;
+  padding: 10px 20px;
   border: 1px solid ${(props) => props.theme.colors.grey3};
   border-radius: 999px;
   font-size: 14px;
@@ -24,12 +24,34 @@ export const ProblemInputFormLayout = styled.form`
 
 export const ProblemInputFormTitleInput = styled.input`
   ${inputStyle};
+  font-size: 16px;
+`;
+
+export const ProblemInputFormTagAddButton = styled.button`
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 999px;
+  background-color: ${(props) => props.theme.colors.grey3 + "88"};
+  font-size: 16px;
+  transition: background-color 200ms ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.grey3 + "FF"};
+  }
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export const ProblemInputFormTagList = styled.ul`
   display: flex;
   gap: 8px;
-  /* width: 100%; */
 `;
 
 export const ProblemInputFormTagInputBox = styled.div`
@@ -37,12 +59,6 @@ export const ProblemInputFormTagInputBox = styled.div`
   gap: 8px;
   position: relative;
   width: 100%;
-`;
-
-export const ProblemInputFormDescriptionTextArea = styled.textarea`
-  ${inputStyle};
-  height: 100%;
-  resize: none;
 `;
 
 export const ProblemInputFormFileSelectorBox = styled.div`
