@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { TagSize } from "@/components/Tag/Tag.component";
 import { TagInputLayout } from "@/components/Tag/TagInput.styled";
@@ -13,7 +13,11 @@ const MAX_LENGTH = 14;
 const TagInput = ({ size = "small", onSubmit }: TagProps) => {
   const inputRef = useRef<HTMLDivElement | null>(null);
 
-  const handleInputEvent = (e: React.ChangeEvent<HTMLDivElement>) => {
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  const inputEventHandler = (e: React.ChangeEvent<HTMLDivElement>) => {
     const newValue = e.target.textContent;
 
     // 최대 입력 갯수를 MAX_LENGTH로 제한
@@ -42,14 +46,20 @@ const TagInput = ({ size = "small", onSubmit }: TagProps) => {
     onSubmit(inputRef.current.textContent ?? "");
   };
 
+  const keyDownHandler: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (!inputRef.current) return;
+    if (e.key === "Enter") onSubmit(inputRef.current.textContent ?? "");
+  };
+
   return (
     <TagInputLayout
       size={size}
       ref={inputRef}
       spellCheck={false}
       contentEditable
-      onInput={handleInputEvent}
+      onInput={inputEventHandler}
       onBlur={blurHandler}
+      onKeyDown={keyDownHandler}
     ></TagInputLayout>
   );
 };

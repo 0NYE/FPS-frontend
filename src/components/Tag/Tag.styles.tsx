@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { TagSize } from "@/components/Tag/Tag.component";
 
 export const TagLayout = styled.div<{ size: TagSize }>`
+  display: flex;
   border-radius: 999px;
   background-color: ${(props) => props.theme.colors.grey3 + "88"};
   transition: background-color 200ms ease;
@@ -28,6 +29,7 @@ export const TagLayout = styled.div<{ size: TagSize }>`
 export const TagDeleteButton = styled.button`
   margin-right: -6px;
   background-color: transparent;
+  font-size: 10px;
   color: ${(props) => props.theme.colors.black};
   font-weight: 700;
   border: none;
