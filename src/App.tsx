@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useAtom } from "jotai";
 import { ThemeProvider } from "styled-components";
@@ -26,6 +28,14 @@ function App() {
         isOpen={loginModalActive}
         closeHandler={() => setLoginModalActive(false)}
       ></LoginModal>
+      <ToastContainer
+        position="top-center"
+        autoClose={4500}
+        newestOnTop={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        theme="light"
+      />
       <GlobalStyles />
     </ThemeProvider>
   );

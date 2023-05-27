@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import { useAtom } from "jotai";
 
@@ -19,6 +20,10 @@ const LoginForm = () => {
     id: "",
     password: "",
   });
+  const notifyError = () =>
+    toast.error(
+      "로그인에 실패했습니다. 아이디와 비밀번호를 다시 확인해주세요."
+    );
 
   const buttonClickHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
     if ([idInput.value, passwordInput.value].includes("")) {
@@ -38,14 +43,12 @@ const LoginForm = () => {
       }),
     })
       .then((response) => {
-        alert("로그인에 성공했습니다.");
+        if (!response.ok) throw new Error(response.statusText);
         setUser(true);
         setLoginModalActive(false);
-        console.log("login success!");
       })
       .catch((err) => {
-        alert("로그인에 실패했습니다.");
-        console.error(err);
+        notifyError();
       });
   };
 
