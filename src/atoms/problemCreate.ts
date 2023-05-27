@@ -1,8 +1,8 @@
-import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
 import { defaultCreateProblemMarkdown } from "@/constants/markdown";
 
-export const problemCreateInfoAtom = atom<{
+export const problemCreateInfoAtom = atomWithReset<{
   title: string;
   tags: string[];
   description: string;

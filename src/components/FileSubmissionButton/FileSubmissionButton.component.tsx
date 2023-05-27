@@ -23,6 +23,7 @@ const fileMIMEType: { [K in FileType]: string } = {
 interface FileSubmissionButtonProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
+  active?: boolean;
   fileType?: FileType;
 }
 
@@ -31,36 +32,34 @@ const defaultFileName = "클릭 혹은 드래그";
 const FileSubmissionButton = ({
   fileType,
   id,
+  active,
   onChange,
   ...props
 }: FileSubmissionButtonProps) => {
   const [selectedFileName, setSelectedFileName] = useState(defaultFileName);
-  const [isFileSubmitted, setIsFileSubmitted] = useState(false);
 
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const files = e.target.files;
 
     if (files && files.length > 0) {
       setSelectedFileName(files[0].name);
-      setIsFileSubmitted(true);
     } else {
       setSelectedFileName(defaultFileName);
-      setIsFileSubmitted(false);
     }
 
     onChange && onChange(e);
   };
 
   return (
-    <FileSubmissionButtonLayout isFileSubmitted={isFileSubmitted}>
+    <FileSubmissionButtonLayout isFileSubmitted={!!active}>
       <FileSubmissionButtonLabel htmlFor={id}>
-        <FileSubmissionButtonHeader isFileSubmitted={isFileSubmitted}>
+        <FileSubmissionButtonHeader isFileSubmitted={!!active}>
           {fileType || "파일"} 제출
         </FileSubmissionButtonHeader>
         <FileSubmissionButtonSvgBox>
-          {isFileSubmitted ? <FileActivated /> : <File />}
+          {active ? <FileActivated /> : <File />}
         </FileSubmissionButtonSvgBox>
-        <FileSubmissionFooter isFileSubmitted={isFileSubmitted}>
+        <FileSubmissionFooter isFileSubmitted={!!active}>
           {selectedFileName}
         </FileSubmissionFooter>
       </FileSubmissionButtonLabel>

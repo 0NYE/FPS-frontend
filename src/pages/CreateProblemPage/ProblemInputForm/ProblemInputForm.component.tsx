@@ -1,13 +1,16 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { useAtom } from "jotai";
+import { useResetAtom } from "jotai/utils";
 
 import { ReactComponent as Add } from "@/assets/images/add.svg";
 import { problemCreateInfoAtom } from "@/atoms/problemCreate";
 import Button from "@/components/Button/Button.component";
 import FileSubmissionButton from "@/components/FileSubmissionButton/FileSubmissionButton.component";
 import MarkdownEditor from "@/components/MarkdownEditor/MarkdownEditor.component";
+import { SupportedLanguage } from "@/components/ProblemBlock/ProblemBlock.component";
 import Tag from "@/components/Tag/Tag.component";
 import TagInput from "@/components/Tag/TagInput.component";
 import { domain } from "@/constants/api";
@@ -22,6 +25,7 @@ import {
 } from "@/pages/CreateProblemPage/ProblemInputForm/ProblemInputForm.styles";
 import { readTextFromFile } from "@/utils/readTextFromFile";
 
+
 const ProblemInputForm = () => {
   const form = useRef<HTMLFormElement>(null);
   const [problemCreateInfo, setProblemCreateInfo] = useAtom(
@@ -29,8 +33,18 @@ const ProblemInputForm = () => {
   );
   const { title, tags, description, htmlCode, cssCode, jsCode } =
     problemCreateInfo;
+  const resetProblemCreateInfo = useResetAtom(problemCreateInfoAtom);
   const [isAddingTag, setIsAddingTag] = useState(false);
+  const notifySuccess = () => toast.success("문제 생성에 성공했습니다!");
+  const notifyError = (message: string) => toast.error(message);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    return () => {
+      resetProblemCreateInfo();
+    };
+  }, [resetProblemCreateInfo]);
+
   const formSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
   };
@@ -40,6 +54,10 @@ const ProblemInputForm = () => {
   };
 
   const addTagClickHandler = () => {
+    if (tags.length >= 5) {
+      notifyError("태그는 최대 5개까지 작성할 수 있습니다.");
+      return;
+    }
     setIsAddingTag(true);
   };
 
@@ -71,27 +89,30 @@ const ProblemInputForm = () => {
     });
   };
 
-  const cssInputChangeHandler: React.ChangeEventHandler<
-    HTMLInputElement
-  > = async (e) => {
-    if (!e.target.files) return;
-    setProblemCreateInfo({
-      ...problemCreateInfo,
-      cssCode: await readTextFromFile(e.target.files[0]),
-    });
-  };
+  const inputChangeHandler: React.ChangeEventHandler<HTMLInputElement> = async (
+    e
+  ) => {
+    const language = e.target.dataset.infoKey;
+    if (!language || !e.target.files) return;
 
-  const jsInputChangeHandler: React.ChangeEventHandler<
-    HTMLInputElement
-  > = async (e) => {
-    if (!e.target.files) return;
     setProblemCreateInfo({
       ...problemCreateInfo,
-      jsCode: await readTextFromFile(e.target.files[0]),
+      [language]: await readTextFromFile(e.target.files[0]),
     });
   };
 
   const problemSubmitHandler = async () => {
+    if (!title) {
+      notifyError("제목을 입력해주세요.");
+      return;
+    } else if (!tags.length) {
+      notifyError("최소 1개 이상의 태그를 작성해야 합니다.");
+      return;
+    } else if (!htmlCode) {
+      notifyError("HTML 파일을 제출해야 합니다.");
+      return;
+    }
+
     const response = await fetch(`http://${domain}/problems`, {
       method: "POST",
       headers: {
@@ -110,11 +131,14 @@ const ProblemInputForm = () => {
     const responseMessage = await response.json();
 
     if (!response.ok) {
-      alert(`문제 생성에 실패했습니다! 이유: ${responseMessage.message}`);
+      notifyError(
+        "서버 오류로 인해 문제 생성에 실패했습니다. 잠시 후에 다시 시도해주세요"
+      );
       return;
     }
 
-    navigate("");
+    notifySuccess();
+    navigate("/problems");
   };
 
   return (
@@ -154,17 +178,23 @@ const ProblemInputForm = () => {
         <FileSubmissionButton
           id="html"
           fileType="HTML"
-          onChange={htmlInputChangeHandler}
+          data-info-key="htmlCode"
+          onChange={inputChangeHandler}
+          active={!!htmlCode}
         />
         <FileSubmissionButton
           id="css"
           fileType="CSS"
-          onChange={cssInputChangeHandler}
+          data-info-key="cssCode"
+          onChange={inputChangeHandler}
+          active={!!cssCode}
         />
         <FileSubmissionButton
           id="js"
           fileType="JavaScript"
-          onChange={jsInputChangeHandler}
+          data-fileType="jsCode"
+          onChange={inputChangeHandler}
+          active={!!jsCode}
         />
       </ProblemInputFormFileSelectorBox>
       <ProblemInputFormControlBox>
