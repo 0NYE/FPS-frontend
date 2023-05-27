@@ -11,8 +11,6 @@ import ProblemPage from "@/pages/ProblemPage/ProblemPage.component";
 import GlobalStyles from "@/style/GlobalStyles";
 import { theme } from "@/style/theme";
 
-
-
 function App() {
   const [loginModalActive, setLoginModalActive] = useAtom(loginModalActiveAtom);
 
@@ -26,7 +24,7 @@ function App() {
       </Routes>
       <LoginModal
         isOpen={loginModalActive}
-        onRequestClose={() => setLoginModalActive(false)}
+        closeHandler={() => setLoginModalActive(false)}
       ></LoginModal>
       <GlobalStyles />
     </ThemeProvider>
