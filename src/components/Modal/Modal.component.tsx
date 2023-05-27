@@ -10,14 +10,20 @@ interface ModalProps {
 
 const Modal = ({ isOpen, closeHandler, children }: ModalProps) => {
   const overlayRef = useRef<HTMLDivElement | null>(null);
-  const overlayClickHandler: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const overlayMouseDownHandler: React.MouseEventHandler<HTMLDivElement> = (
+    e
+  ) => {
     if (e.target === overlayRef.current) {
       closeHandler && closeHandler();
     }
   };
 
   return (
-    <Overlay ref={overlayRef} visible={isOpen} onClick={overlayClickHandler}>
+    <Overlay
+      ref={overlayRef}
+      visible={isOpen}
+      onMouseDown={overlayMouseDownHandler}
+    >
       <Content visible={isOpen}>{children}</Content>
     </Overlay>
   );
