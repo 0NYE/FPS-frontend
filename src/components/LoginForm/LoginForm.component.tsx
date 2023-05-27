@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useAtom } from "jotai";
 
@@ -15,8 +15,21 @@ const LoginForm = () => {
   const passwordInput = useInput("");
   const [user, setUser] = useAtom(userAtom);
   const [loginModalActive, setLoginModalActive] = useAtom(loginModalActiveAtom);
+  const [inputWarnings, setInputWarnings] = useState({
+    id: "",
+    password: "",
+  });
 
   const buttonClickHandler: React.MouseEventHandler<HTMLButtonElement> = () => {
+    if ([idInput.value, passwordInput.value].includes("")) {
+      setInputWarnings({
+        id: idInput.value ? "" : "아이디를 입력해주세요!",
+        password: passwordInput.value ? "" : "비밀번호를 입력해주세요!",
+      });
+
+      return;
+    }
+
     fetch(`${domain}/auth/login`, {
       method: "POST",
       body: JSON.stringify({
@@ -38,11 +51,20 @@ const LoginForm = () => {
 
   return (
     <LoginFormLayout>
-      <LabeledInput label="아이디" id="id" type="email" {...idInput} />
+      <LabeledInput
+        label="아이디"
+        id="id"
+        type="email"
+        placeholder="아이디를 입력해주세요"
+        warningText={inputWarnings.id}
+        {...idInput}
+      />
       <LabeledInput
         label="비밀번호"
         id="password"
         type="password"
+        placeholder="비밀번호를 입력해주세요"
+        warningText={inputWarnings.password}
         {...passwordInput}
       />
       <Button variant="black" size="large" onClick={buttonClickHandler}>
