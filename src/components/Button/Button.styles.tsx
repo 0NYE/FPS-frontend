@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export interface ButtonLayoutProps {
-  variant?: "grey" | "black" | "green" | "red";
+  variant?: "grey" | "black" | "red" | "green" | "blue";
   outline?: boolean;
   size?: "small" | "large";
 }
@@ -20,12 +20,16 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
         background-color: ${(props) => props.theme.colors.black};
         color: ${(props) => props.theme.colors.white};
       `,
+      red: css`
+        background-color: ${(props) => props.theme.colors.red};
+        color: ${(props) => props.theme.colors.white};
+      `,
       green: css`
         background-color: ${(props) => props.theme.colors.green};
         color: ${(props) => props.theme.colors.white};
       `,
-      red: css`
-        background-color: ${(props) => props.theme.colors.red};
+      blue: css`
+        background-color: ${(props) => props.theme.colors.blue};
         color: ${(props) => props.theme.colors.white};
       `,
     }[variant ?? "grey"])}

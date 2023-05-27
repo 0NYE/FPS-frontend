@@ -67,7 +67,7 @@ const LoginForm = () => {
         warningText={inputWarnings.password}
         {...passwordInput}
       />
-      <Button variant="black" size="large" onClick={buttonClickHandler}>
+      <Button variant="blue" size="large" onClick={buttonClickHandler}>
         로그인
       </Button>
     </LoginFormLayout>

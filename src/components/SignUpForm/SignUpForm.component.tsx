@@ -73,7 +73,7 @@ const SignUpForm = () => {
         warningText={inputWarnings.password}
         {...passwordInput}
       />
-      <Button variant="black" size="large" onClick={buttonClickHandler}>
+      <Button variant="blue" size="large" onClick={buttonClickHandler}>
         회원가입
       </Button>
     </SignUpFormLayout>
