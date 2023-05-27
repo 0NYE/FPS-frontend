@@ -17,8 +17,8 @@ const Modal = ({ isOpen, closeHandler, children }: ModalProps) => {
   };
 
   return (
-    <Overlay ref={overlayRef} isOpen={isOpen} onClick={overlayClickHandler}>
-      <Content>{children}</Content>
+    <Overlay ref={overlayRef} visible={isOpen} onClick={overlayClickHandler}>
+      <Content visible={isOpen}>{children}</Content>
     </Overlay>
   );
 };
