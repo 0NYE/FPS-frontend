@@ -6,16 +6,16 @@ import { useAtom } from "jotai";
 import { htmlAtom, cssAtom, jsAtom } from "@/atoms/code";
 import Button from "@/components/Button/Button.component";
 import FileSubmissionButton from "@/components/FileSubmissionButton/FileSubmissionButton.component";
+import MarkdownEditor from "@/components/MarkdownEditor/MarkdownEditor.component";
 import Tag from "@/components/Tag/Tag.component";
+import TagInput from "@/components/Tag/TagInput.component";
 import { domain } from "@/constants/api";
 import { useInput } from "@/hooks/useInput";
 import { useTextArea } from "@/hooks/useTextArea";
 import {
   ProblemInputFormLayout,
   ProblemInputFormControlBox,
-  ProblemInputFormDescriptionTextArea,
   ProblemInputFormFileSelectorBox,
-  ProblemInputFormTagInput,
   ProblemInputFormTagInputBox,
   ProblemInputFormTitleInput,
   ProblemInputFormTagList,
@@ -25,9 +25,9 @@ import { readTextFromFile } from "@/utils/readTextFromFile";
 const ProblemInputForm = () => {
   const form = useRef<HTMLFormElement>(null);
   const titleInput = useInput("");
-  const tagInput = useInput("");
   const descriptionTextArea = useTextArea("");
   const [tags, setTags] = useState<string[]>([]);
+  const [isAddingTag, setIsAddingTag] = useState(false);
   const [htmlCode, setHtmlCode] = useAtom(htmlAtom);
   const [cssCode, setCssCode] = useAtom(cssAtom);
   const [jsCode, setJsCode] = useAtom(jsAtom);
@@ -37,9 +37,13 @@ const ProblemInputForm = () => {
     e.preventDefault();
   };
 
-  const tagButtonClickHandler = () => {
-    setTags([...tags, tagInput.value]);
-    tagInput.setValue("");
+  const addTagClickHandler = () => {
+    setIsAddingTag(true);
+  };
+
+  const tagAddHandler = (newTag: string) => {
+    if (newTag) setTags([...tags, newTag]);
+    setIsAddingTag(false);
   };
 
   const tagDeleteHandler = (targetTag: string) => {
@@ -98,32 +102,26 @@ const ProblemInputForm = () => {
       <ProblemInputFormTitleInput
         value={titleInput.value}
         onChange={titleInput.onChange}
-        placeholder="제목"
+        placeholder="문제 제목을 입력하세요."
       />
       <ProblemInputFormTagInputBox>
-        <ProblemInputFormTagInput
-          value={tagInput.value}
-          onChange={tagInput.onChange}
-          placeholder="태그"
-        />
-        <Button variant="black" onClick={tagButtonClickHandler}>
-          태그 추가
-        </Button>
+        <div onClick={addTagClickHandler}>
+          <Tag size="medium">{"태그"}</Tag>
+        </div>
         <ProblemInputFormTagList>
           {tags.map((tag) => (
             <li key={tag}>
-              <Tag removable={true} onDelete={tagDeleteHandler}>
+              <Tag size="medium" removable={true} onDelete={tagDeleteHandler}>
                 {tag}
               </Tag>
             </li>
           ))}
+          <li>
+            {isAddingTag && <TagInput size="medium" onSubmit={tagAddHandler} />}
+          </li>
         </ProblemInputFormTagList>
       </ProblemInputFormTagInputBox>
-      <ProblemInputFormDescriptionTextArea
-        value={descriptionTextArea.value}
-        onChange={descriptionTextArea.onChange}
-        placeholder="문제 설명"
-      />
+      <MarkdownEditor />
       <ProblemInputFormFileSelectorBox>
         <FileSubmissionButton
           id="html"
