@@ -2,7 +2,7 @@ import { Styles } from "react-modal";
 
 export const modalCustomStyles: Styles = {
   overlay: {
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
   },
   content: {
     position: "absolute",
