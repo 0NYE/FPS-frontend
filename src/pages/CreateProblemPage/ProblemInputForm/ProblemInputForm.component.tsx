@@ -10,7 +10,6 @@ import { problemCreateInfoAtom } from "@/atoms/problemCreate";
 import Button from "@/components/Button/Button.component";
 import FileSubmissionButton from "@/components/FileSubmissionButton/FileSubmissionButton.component";
 import MarkdownEditor from "@/components/MarkdownEditor/MarkdownEditor.component";
-import { SupportedLanguage } from "@/components/ProblemBlock/ProblemBlock.component";
 import Tag from "@/components/Tag/Tag.component";
 import TagInput from "@/components/Tag/TagInput.component";
 import { domain } from "@/constants/api";
@@ -24,7 +23,6 @@ import {
   ProblemInputFormTagList,
 } from "@/pages/CreateProblemPage/ProblemInputForm/ProblemInputForm.styles";
 import { readTextFromFile } from "@/utils/readTextFromFile";
-
 
 const ProblemInputForm = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -77,16 +75,6 @@ const ProblemInputForm = () => {
   const descriptionInputHandler = (value: string | undefined) => {
     if (value === undefined) return;
     setProblemCreateInfo({ ...problemCreateInfo, description: value });
-  };
-
-  const htmlInputChangeHandler: React.ChangeEventHandler<
-    HTMLInputElement
-  > = async (e) => {
-    if (!e.target.files) return;
-    setProblemCreateInfo({
-      ...problemCreateInfo,
-      htmlCode: await readTextFromFile(e.target.files[0]),
-    });
   };
 
   const inputChangeHandler: React.ChangeEventHandler<HTMLInputElement> = async (

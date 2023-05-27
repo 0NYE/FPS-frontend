@@ -25,6 +25,10 @@ export const ProblemInputFormLayout = styled.form`
 export const ProblemInputFormTitleInput = styled.input`
   ${inputStyle};
   font-size: 16px;
+
+  &:focus {
+    box-shadow: ${(props) => props.theme.shadows.medium};
+  }
 `;
 
 export const ProblemInputFormTagAddButton = styled.button`
