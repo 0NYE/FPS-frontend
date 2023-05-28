@@ -45,7 +45,8 @@ export const MainHeaderRightRow = styled.div`
 export const MainHeaderLoginButton = styled.button`
   border: none;
   background-color: transparent;
-  color: ${(props) => props.theme.colors.grey1};
+  color: ${(props) => props.theme.colors.black};
+  font-size: 14px;
   cursor: pointer;
   transition: color 150ms ease;
 
