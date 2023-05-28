@@ -1,4 +1,5 @@
 import { CodeResultFrameLayout } from "@/components/CodeResultFrame/CodeResultFrame.styles";
+import { defaultCodeResultFrameCode } from "@/constants/codeResult";
 
 interface CodeResultFrameProps
   extends React.IframeHTMLAttributes<HTMLIFrameElement> {
@@ -13,13 +14,15 @@ const CodeResultFrame = ({
   js = "",
   ...props
 }: CodeResultFrameProps) => {
-  const resultSourceCode = `
+  const resultSourceCode = html
+    ? `
     <html>
       <body>${html}</body>
       <style>${css}</style>
       <script>${js}</script>
     </html>
-  `;
+  `
+    : defaultCodeResultFrameCode;
 
   return (
     <CodeResultFrameLayout>

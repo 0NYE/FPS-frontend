@@ -2,59 +2,67 @@ import styled, { css } from "styled-components";
 
 const inputStyle = css`
   width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  background-color: ${(props) => props.theme.colors.grey4};
+  padding: 10px 20px;
+  border: 1px solid ${(props) => props.theme.colors.grey3};
+  border-radius: 999px;
   font-size: 14px;
   outline: none;
+
+  &:focus {
+    border-color: ${(props) => props.theme.colors.grey1};
+  }
 `;
 
 export const ProblemInputFormLayout = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 12px;
   height: 100%;
-  padding: 32px;
+  padding: 28px 32px 32px 32px;
 `;
 
 export const ProblemInputFormTitleInput = styled.input`
   ${inputStyle};
+  font-size: 16px;
+
+  &:focus {
+    box-shadow: ${(props) => props.theme.shadows.medium};
+  }
+`;
+
+export const ProblemInputFormTagAddButton = styled.button`
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 999px;
+  background-color: ${(props) => props.theme.colors.grey3 + "88"};
+  font-size: 16px;
+  transition: background-color 200ms ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.grey3 + "FF"};
+  }
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export const ProblemInputFormTagList = styled.ul`
   display: flex;
   gap: 8px;
-  width: 100%;
 `;
 
 export const ProblemInputFormTagInputBox = styled.div`
+  display: flex;
+  gap: 8px;
   position: relative;
   width: 100%;
-
-  & > button {
-    position: absolute;
-    right: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  & > ${ProblemInputFormTagList} {
-    position: absolute;
-    left: 0;
-    top: calc(100% + 4px);
-  }
-`;
-
-export const ProblemInputFormTagInput = styled.input`
-  ${inputStyle};
-`;
-
-export const ProblemInputFormDescriptionTextArea = styled.textarea`
-  ${inputStyle};
-  height: 100%;
-  resize: none;
 `;
 
 export const ProblemInputFormFileSelectorBox = styled.div`
