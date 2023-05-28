@@ -5,12 +5,10 @@ import { LogoLayout, LogoParagraph } from "@/components/Logo/Logo.styles";
 
 const Logo = () => {
   return (
-    <Link to="/">
-      <LogoLayout>
-        <Aim />
-        <LogoParagraph>fps</LogoParagraph>
-      </LogoLayout>
-    </Link>
+    <LogoLayout to="/">
+      <Aim />
+      <LogoParagraph>fps</LogoParagraph>
+    </LogoLayout>
   );
 };
 

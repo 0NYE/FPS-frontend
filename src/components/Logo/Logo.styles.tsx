@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 
-export const LogoLayout = styled.div`
+export const LogoLayout = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
