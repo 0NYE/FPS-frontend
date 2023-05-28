@@ -18,11 +18,11 @@ export const MainHeaderNavListItem = styled.li`
   height: 100%;
 
   &:has(${MainHeaderNavLink}.active) {
-    border-bottom: 2px solid ${(props) => props.theme.colors.black};
+    border-bottom: 2px solid ${(props) => props.theme.colors.blue};
 
     ${MainHeaderNavLink} {
       margin-top: 2px;
-      color: ${(props) => props.theme.colors.black};
+      color: ${(props) => props.theme.colors.blue};
     }
   }
 `;
