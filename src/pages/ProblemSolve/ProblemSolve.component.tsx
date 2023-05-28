@@ -105,6 +105,7 @@ const ProblemSolve = () => {
             <ProblemSection
               id={problem_id ?? ""}
               title={problem.title}
+              tags={[]}
               descriptionMarkdown={problem.description}
               htmlCode={problem.HTML_code}
               cssCode={problem.CSS_code}

@@ -5,7 +5,6 @@ export const ProblemListPageLayout = styled.div``;
 export const ProblemListPageMain = styled.main`
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   width: 800px;
   margin: 32px auto;
 `;
