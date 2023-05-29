@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Editor, { OnMount } from "@monaco-editor/react";
@@ -16,7 +16,11 @@ import { useFetch } from "@/hooks/useFetch";
 import {
   SolveSectionLayout,
   EditorControlBox,
+  LanguageButtonBox,
   LanguageButton,
+  AdditionalControlBox,
+  EditorToolButton,
+  EditorControlButtonToolTipBox,
   EditorBox,
   UserCodeRenderBoxWrapper,
   UserCodeRenderBox,
@@ -41,6 +45,18 @@ const ProblemSolve = () => {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const changeFlag = useRef(false);
   const [simillarity, setSimillarity] = useState(0);
+
+  useEffect(() => {
+    const resetAllState = () => {
+      setCurrentLanguage("html");
+      setHtml("");
+      setCss("");
+      setJs("");
+      setSimillarity(0);
+      editorRef.current?.setValue("");
+    };
+    resetAllState();
+  }, [setHtml, setCss, setJs, setSimillarity, problem_id]);
 
   const langButtonClickHandler: React.MouseEventHandler<HTMLDivElement> = (
     e
@@ -94,6 +110,8 @@ const ProblemSolve = () => {
     else if (currentLanguage === "css") setCss(code);
     else if (currentLanguage === "javascript") setJs(code);
 
+    if (currentLanguage === "html" && code === "") return;
+    if (html === "") return;
     fetchSimillarity();
   };
 

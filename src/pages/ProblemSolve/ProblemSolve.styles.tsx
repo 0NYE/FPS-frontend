@@ -24,6 +24,8 @@ export const EditorControlBox = styled.div`
   background-color: ${(props) => props.theme.colors.white};
 `;
 
+export const LanguageButtonBox = styled.div``;
+
 export const LanguageButton = styled.button<{
   color?: string;
   active?: boolean;
@@ -42,6 +44,12 @@ export const LanguageButton = styled.button<{
       props.active ? props.color : props.color + "20"};
   }
 `;
+
+export const AdditionalControlBox = styled.div``;
+
+export const EditorToolButton = styled.button``;
+
+export const EditorControlButtonToolTipBox = styled.div``;
 
 export const EditorBox = styled.div`
   flex-grow: 1;
