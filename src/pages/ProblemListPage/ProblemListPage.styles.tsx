@@ -6,7 +6,13 @@ export const ProblemListPageMain = styled.main`
   display: flex;
   flex-direction: column;
   width: 800px;
-  margin: 32px auto;
+  margin: 16px auto;
+`;
+
+export const ProblemListControlBox = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
 `;
 
 export const ProblemBlockList = styled.ul`
