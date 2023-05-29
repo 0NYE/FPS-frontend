@@ -1,10 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
+import { toast } from "react-toastify";
 
 import Editor, { OnMount } from "@monaco-editor/react";
 import { useAtom } from "jotai";
 import { editor } from "monaco-editor";
 
+import { ReactComponent as Reset } from "@/assets/images/replay.svg";
+import { ReactComponent as ShortCut } from "@/assets/images/shortcut.svg";
 import { htmlAtom, cssAtom, jsAtom } from "@/atoms/code";
 import Button from "@/components/Button/Button.component";
 import CodeResultFrame from "@/components/CodeResultFrame/CodeResultFrame.component";
@@ -16,7 +20,10 @@ import { useFetch } from "@/hooks/useFetch";
 import {
   SolveSectionLayout,
   EditorControlBox,
+  LanguageButtonBox,
   LanguageButton,
+  AdditionalControlBox,
+  EditorToolButton,
   EditorBox,
   UserCodeRenderBoxWrapper,
   UserCodeRenderBox,
@@ -41,6 +48,25 @@ const ProblemSolve = () => {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const changeFlag = useRef(false);
   const [simillarity, setSimillarity] = useState(0);
+  const loadingCounterRef = useRef(0);
+  const [isSimillarityLoading, setIsSimillarityLoading] = useState(false);
+  const notifyShortcuts = () =>
+    toast.info("되돌리기: Ctrl + Z", {
+      autoClose: false,
+    });
+
+  const resetAllState = useCallback(() => {
+    setCurrentLanguage("html");
+    setHtml("");
+    setCss("");
+    setJs("");
+    setSimillarity(0);
+    editorRef.current?.setValue("");
+  }, [setHtml, setCss, setJs, setSimillarity]);
+
+  useEffect(() => {
+    resetAllState();
+  }, [problem_id, resetAllState]);
 
   const langButtonClickHandler: React.MouseEventHandler<HTMLDivElement> = (
     e
@@ -54,6 +80,18 @@ const ProblemSolve = () => {
     else if (language === "css") editorRef.current?.setValue(css);
     else if (language === "javascript") editorRef.current?.setValue(js);
     changeFlag.current = false;
+  };
+
+  const resetButtonClickHandler: React.MouseEventHandler<
+    HTMLButtonElement
+  > = () => {
+    resetAllState();
+  };
+
+  const showShortcutsButtonClickHandler: React.MouseEventHandler<
+    HTMLButtonElement
+  > = () => {
+    notifyShortcuts();
   };
 
   const editorMountHandler: OnMount = (editor) => {
@@ -77,23 +115,37 @@ const ProblemSolve = () => {
 
   const fetchSimillarity = async () => {
     const formData = new FormData();
-    formData.append("problem", await captureOriginalCodeResult());
-    formData.append("submit", await captureUserCodeResult());
+    try {
+      formData.append("problem", await captureOriginalCodeResult());
+      formData.append("submit", await captureUserCodeResult());
+    } catch {
+      return;
+    }
+
+    loadingCounterRef.current++;
+    setIsSimillarityLoading(true);
+
     const json = await fetch(`http://${domain}/compare`, {
       method: "POST",
       body: formData,
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .catch((error) => console.error(error));
 
     setSimillarity(json?.score ? json.score * 100 : 0);
+    loadingCounterRef.current--;
+    if (loadingCounterRef.current === 0) setIsSimillarityLoading(false);
   };
 
   const editorChangeHandler = (code: string | undefined) => {
-    if (!code || changeFlag.current) return;
+    if (code === undefined || changeFlag.current) return;
 
     if (currentLanguage === "html") setHtml(code);
     else if (currentLanguage === "css") setCss(code);
     else if (currentLanguage === "javascript") setJs(code);
 
+    if (currentLanguage === "html" && code === "") return;
+    if (html === "") return;
     fetchSimillarity();
   };
 
@@ -110,33 +162,44 @@ const ProblemSolve = () => {
               htmlCode={problem.HTML_code}
               cssCode={problem.CSS_code}
               jsCode={problem.JS_code}
-              tipText="잘 모르겠다면 브라우저 개발자 도구를 활용해보세요!"
+              tipText="정확한 수치를 모르겠다면 브라우저 개발자 도구를 활용해보세요!"
             />
           }
           rightChildren={
             <SolveSectionLayout>
               <EditorControlBox onClick={langButtonClickHandler}>
-                <LanguageButton
-                  color={colors.htmlTheme}
-                  data-lang="html"
-                  active={currentLanguage === "html"}
-                >
-                  HTML
-                </LanguageButton>
-                <LanguageButton
-                  color={colors.cssTheme}
-                  data-lang="css"
-                  active={currentLanguage === "css"}
-                >
-                  CSS
-                </LanguageButton>
-                <LanguageButton
-                  color={colors.jsTheme}
-                  data-lang="javascript"
-                  active={currentLanguage === "javascript"}
-                >
-                  JavaScript
-                </LanguageButton>
+                <LanguageButtonBox>
+                  {" "}
+                  <LanguageButton
+                    color={colors.htmlTheme}
+                    data-lang="html"
+                    active={currentLanguage === "html"}
+                  >
+                    HTML
+                  </LanguageButton>
+                  <LanguageButton
+                    color={colors.cssTheme}
+                    data-lang="css"
+                    active={currentLanguage === "css"}
+                  >
+                    CSS
+                  </LanguageButton>
+                  <LanguageButton
+                    color={colors.jsTheme}
+                    data-lang="javascript"
+                    active={currentLanguage === "javascript"}
+                  >
+                    JavaScript
+                  </LanguageButton>
+                </LanguageButtonBox>
+                <AdditionalControlBox>
+                  <EditorToolButton onClick={resetButtonClickHandler}>
+                    <Reset />
+                  </EditorToolButton>
+                  <EditorToolButton onClick={showShortcutsButtonClickHandler}>
+                    <ShortCut />
+                  </EditorToolButton>
+                </AdditionalControlBox>
               </EditorControlBox>
               <EditorBox>
                 <Editor
@@ -165,7 +228,15 @@ const ProblemSolve = () => {
                 <ProgressBarBox>
                   <ProgressBar
                     value={simillarity}
-                    label={`유사도: ${simillarity}%`}
+                    animated={true}
+                    label={`결과물 유사도: ${parseFloat(
+                      simillarity.toFixed(2)
+                    )}%`}
+                  />
+                  <ClipLoader
+                    color="#999"
+                    loading={isSimillarityLoading}
+                    size={20}
                   />
                 </ProgressBarBox>
                 <Button variant="green">제출</Button>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const ProblemSectionLayout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 11px;
   height: 100%;
   padding: 16px 16px 0 16px;
 `;
@@ -12,6 +11,7 @@ export const ProblemTextSection = styled.section`
   display: flex;
   flex-direction: column;
   flex: 1 1 0;
+  margin-bottom: 10px;
   overflow: auto;
 `;
 
