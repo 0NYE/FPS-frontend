@@ -7,5 +7,5 @@ export const CreateProblemPageLayout = styled.div`
 `;
 
 export const CreateProblemPageMain = styled.main`
-  height: 100%;
+  flex: 1 1 0;
 `;
