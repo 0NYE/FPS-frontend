@@ -13,6 +13,10 @@ export const SearchBarInput = styled.input`
   color: ${(props) => props.theme.colors.black};
   font-size: 14px;
 
+  &:focus {
+    background-color: ${(props) => props.theme.colors.grey3};
+  }
+
   &::placeholder {
     font-size: 14px;
     color: ${(props) => props.theme.colors.grey1};
