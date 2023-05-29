@@ -55,7 +55,7 @@ export const UserCodeRenderBoxWrapper = styled.div`
 `;
 
 export const UserCodeRenderBox = styled.div`
-  min-height: 500px;
+  height: 500px;
   border: 1px solid ${(props) => props.theme.colors.grey3};
 `;
 
