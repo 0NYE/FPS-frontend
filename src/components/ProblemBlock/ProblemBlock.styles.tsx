@@ -6,20 +6,21 @@ export const ProblemBlockLayout = styled.div`
   align-items: center;
   width: 100%;
   padding: 16px 16px;
-  background-color: ${(props) => props.theme.colors.grey4};
+  border: 1px solid ${(props) => props.theme.colors.grey3};
+  border-radius: 8px;
   color: ${(props) => props.theme.colors.black};
   transition: background-color 220ms ease;
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.grey3};
+    background-color: ${(props) => props.theme.colors.grey4};
   }
 `;
 
 export const ProblemBlockDataBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 `;
 
 export const ProblemBlockHeaderBox = styled.div`
@@ -40,6 +41,7 @@ export const ProblemBlockTitle = styled.h3`
 
 export const ProblemBlockMetaDataBox = styled.div`
   display: flex;
+  gap: 4px;
 `;
 
 export const ProblemBlockMetaDataSpan = styled.span`
@@ -63,14 +65,6 @@ export const ProblemBlockTagBox = styled.div`
 export const ProblemBlockTagList = styled.ul`
   display: flex;
   gap: 8px;
-`;
-
-export const ProblemBlockTagSpan = styled.span`
-  display: block;
-  padding: 4px 6px;
-  border-radius: 2px;
-  background-color: ${(props) => props.theme.colors.grey3};
-  font-size: 13px;
 `;
 
 export const ProblemBlockLanguageIconList = styled.ul`

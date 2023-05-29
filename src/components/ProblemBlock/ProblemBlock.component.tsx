@@ -6,7 +6,6 @@ import {
   ProblemBlockHeaderBox,
   ProblemBlockDataBox,
   ProblemBlockMetaDataSpan,
-  ProblemBlockTagSpan,
   ProblemBlockTagBox,
   ProblemBlockTagList,
 } from "./ProblemBlock.styles";
@@ -24,7 +23,8 @@ import { ReactComponent as Star } from "@/assets/images/star.svg";
 import { ReactComponent as StarActivated } from "@/assets/images/star_activated.svg";
 import { ReactComponent as Success } from "@/assets/images/success.svg";
 import { ReactComponent as Successrate } from "@/assets/images/successrate.svg";
-import { ReactComponent as Tag } from "@/assets/images/Tags.svg";
+import { ReactComponent as TagSvg } from "@/assets/images/Tags.svg";
+import Tag from "@/components/Tag/Tag.component";
 
 export type SupportedLanguage = "HTML" | "CSS" | "JS";
 
@@ -93,11 +93,11 @@ const ProblemBlock = ({
           </ProblemBlockMetaDataSpan>
         </ProblemBlockMetaDataBox>
         <ProblemBlockTagBox>
-          <Tag />
+          <TagSvg />
           <ProblemBlockTagList>
             {tags.map((item) => (
               <li key={item}>
-                <ProblemBlockTagSpan>{item}</ProblemBlockTagSpan>
+                <Tag>{item}</Tag>
               </li>
             ))}
           </ProblemBlockTagList>

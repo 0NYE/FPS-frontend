@@ -7,9 +7,9 @@ export interface Problem {
   dislikeCount: number;
   successRate: number;
   tags: string[];
-  isHtml: boolean;
-  isCss: boolean;
-  isJs: boolean;
+  isHTML: boolean;
+  isCSS: boolean;
+  isJS: boolean;
   detailInfo: ProblemDetailInformation;
 }
 

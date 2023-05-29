@@ -33,14 +33,14 @@ const ProblemListPage = () => {
                 dislikeCount,
                 successRate,
                 tags,
-                isHtml,
-                isCss,
-                isJs,
+                isHTML,
+                isCSS,
+                isJS,
               }) => {
                 const languages: SupportedLanguage[] = [];
-                isHtml && languages.push("HTML");
-                isCss && languages.push("CSS");
-                isJs && languages.push("JS");
+                isHTML && languages.push("HTML");
+                isCSS && languages.push("CSS");
+                isJS && languages.push("JS");
 
                 return (
                   <li key={id} onClick={() => navigate(`/problems/${id}`)}>
