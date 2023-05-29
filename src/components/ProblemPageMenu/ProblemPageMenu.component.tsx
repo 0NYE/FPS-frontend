@@ -12,7 +12,16 @@ const ProblemPageMenu = () => {
       <nav>
         <ProblemPageMenuList>
           <li>
-            <ProblemPageMenuLink to="solve">문제</ProblemPageMenuLink>
+            <ProblemPageMenuLink
+              to="solve"
+              data-active={
+                window.location.pathname.indexOf("/problems") !== -1
+                  ? "active"
+                  : undefined
+              }
+            >
+              문제
+            </ProblemPageMenuLink>
           </li>
           <li>
             <ProblemPageMenuLink to="submissions">

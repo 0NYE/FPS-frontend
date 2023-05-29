@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import ProblemPageHeader from "@/components/ProblemPageHeader/ProblemPageHeader.component";
 import ProblemPageMenu from "@/components/ProblemPageMenu/ProblemPageMenu.component";
@@ -16,21 +15,12 @@ const ProblemPage = () => {
       <ProblemPageMenu />
       <ProblemPageMain>
         <Routes>
-          <Route index element={<DummyPage />}></Route>
+          <Route index element={<ProblemSolve />}></Route>
           <Route path="/solve" element={<ProblemSolve />}></Route>
         </Routes>
       </ProblemPageMain>
     </ProblemPageLayout>
   );
-};
-
-const DummyPage = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("solve");
-  }, []);
-
-  return <></>;
 };
 
 export default ProblemPage;

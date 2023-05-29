@@ -17,7 +17,8 @@ export const MainHeaderNavListItem = styled.li`
   align-items: center;
   height: 100%;
 
-  &:has(${MainHeaderNavLink}.active) {
+  &:has(${MainHeaderNavLink}.active),
+  &:has(${MainHeaderNavLink}[data-active]) {
     border-bottom: 2px solid ${(props) => props.theme.colors.blue};
 
     ${MainHeaderNavLink} {
