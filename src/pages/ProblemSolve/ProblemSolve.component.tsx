@@ -88,7 +88,7 @@ const ProblemSolve = () => {
   };
 
   const editorChangeHandler = (code: string | undefined) => {
-    if (!code || changeFlag.current) return;
+    if (code === undefined || changeFlag.current) return;
 
     if (currentLanguage === "html") setHtml(code);
     else if (currentLanguage === "css") setCss(code);
