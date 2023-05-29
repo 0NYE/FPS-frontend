@@ -165,7 +165,10 @@ const ProblemSolve = () => {
                 <ProgressBarBox>
                   <ProgressBar
                     value={simillarity}
-                    label={`유사도: ${simillarity}%`}
+                    animated={true}
+                    label={`결과물 유사도: ${parseFloat(
+                      simillarity.toFixed(2)
+                    )}%`}
                   />
                 </ProgressBarBox>
                 <Button variant="green">제출</Button>
