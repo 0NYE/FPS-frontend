@@ -35,8 +35,11 @@ const LoginForm = () => {
       return;
     }
 
-    fetch(`${domain}/auth/login`, {
+    fetch(`http://${domain}/auth/login`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         id: idInput.value,
         password: passwordInput.value,

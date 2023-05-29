@@ -10,8 +10,6 @@ import { SignUpFormLayout } from "@/components/SignUpForm/SignUpForm.styles";
 import { domain } from "@/constants/api";
 import { useInput } from "@/hooks/useInput";
 
-
-
 const SignUpForm = () => {
   const nicknameInput = useInput("");
   const idInput = useInput("");
@@ -40,8 +38,11 @@ const SignUpForm = () => {
       return;
     }
 
-    fetch(`${domain}/auth/signup`, {
+    fetch(`http://${domain}/auth/signup`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         id: idInput.value,
         password: passwordInput.value,
