@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
 
@@ -50,10 +50,15 @@ const ProblemSolve = () => {
   const [simillarity, setSimillarity] = useState(0);
   const loadingCounterRef = useRef(0);
   const [isSimillarityLoading, setIsSimillarityLoading] = useState(false);
+  const navigate = useNavigate();
   const notifyShortcuts = () =>
     toast.info("되돌리기: Ctrl + Z", {
       autoClose: false,
     });
+  const notifySubmissionSuccess = () =>
+    toast.success("제출 성공! 아래에서 결과를 확인하세요.");
+  const notifySubmissionError = () =>
+    toast.error("제출에 실패했습니다. 잠시 후에 다시 시도해주세요.");
 
   const resetAllState = useCallback(() => {
     setCurrentLanguage("html");
@@ -149,6 +154,30 @@ const ProblemSolve = () => {
     fetchSimillarity();
   };
 
+  const submitButtonClickHandler: React.MouseEventHandler<
+    HTMLButtonElement
+  > = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("problem_image", await captureOriginalCodeResult());
+      formData.append("user_image", await captureUserCodeResult());
+      formData.append("html_code", html);
+      formData.append("css_code", css);
+      formData.append("js_code", js);
+
+      const response = await fetch(`http://${domain}/problems/submit`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error();
+      notifySubmissionSuccess();
+      navigate("submissions");
+    } catch {
+      notifySubmissionError();
+    }
+  };
+
   return (
     <>
       {problem ? (
@@ -239,7 +268,9 @@ const ProblemSolve = () => {
                     size={20}
                   />
                 </ProgressBarBox>
-                <Button variant="green">제출</Button>
+                <Button variant="green" onClick={submitButtonClickHandler}>
+                  제출
+                </Button>
               </SubmissionControlBox>
             </SolveSectionLayout>
           }
