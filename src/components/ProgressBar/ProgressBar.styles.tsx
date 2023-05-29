@@ -26,9 +26,14 @@ export const InnerBar = styled.div<{
   width: ${(props) => `${props.percentage}%`};
   height: 100%;
   background-color: ${(props) => props.color};
-  color: ${(props) => props.theme.colors.white};
-  font-size: 13px;
-  text-align: center;
-  transition: ${(props) => (props.animated ? "all 600ms ease" : "none")};
+  transition: ${(props) => (props.animated ? "all 1000ms ease" : "none")};
   overflow: hidden;
+`;
+
+export const ProgressBarLabel = styled.p`
+  position: absolute;
+  width: 100%;
+  color: ${(props) => props.theme.colors.white};
+  font-size: 14px;
+  text-align: center;
 `;

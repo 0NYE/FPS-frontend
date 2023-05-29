@@ -2,6 +2,7 @@ import {
   ProgressBarLayout,
   BackgroundBar,
   InnerBar,
+  ProgressBarLabel,
 } from "@/components/ProgressBar/ProgressBar.styles";
 
 interface ProgressBarProps {
@@ -25,9 +26,8 @@ const ProgressBar = ({
   return (
     <ProgressBarLayout>
       <BackgroundBar color={color} />
-      <InnerBar percentage={percentage} color={color} animated={animated}>
-        {label}
-      </InnerBar>
+      <InnerBar percentage={percentage} color={color} animated={animated} />
+      <ProgressBarLabel>{label}</ProgressBarLabel>
     </ProgressBarLayout>
   );
 };
