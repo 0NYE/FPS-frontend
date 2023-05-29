@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
 
 import Editor, { OnMount } from "@monaco-editor/react";
@@ -32,6 +33,7 @@ import {
 import { colors } from "@/style/theme";
 import { ProblemDetailInformation } from "@/types/problem";
 import { iframeToPNG } from "@/utils/html2canvas";
+
 type Languages = "html" | "css" | "javascript";
 
 const ProblemSolve = () => {
@@ -46,6 +48,8 @@ const ProblemSolve = () => {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const changeFlag = useRef(false);
   const [simillarity, setSimillarity] = useState(0);
+  const loadingCounterRef = useRef(0);
+  const [isSimillarityLoading, setIsSimillarityLoading] = useState(false);
   const notifyShortcuts = () =>
     toast.info("되돌리기: Ctrl + Z", {
       autoClose: false,
@@ -111,14 +115,26 @@ const ProblemSolve = () => {
 
   const fetchSimillarity = async () => {
     const formData = new FormData();
-    formData.append("problem", await captureOriginalCodeResult());
-    formData.append("submit", await captureUserCodeResult());
+    try {
+      formData.append("problem", await captureOriginalCodeResult());
+      formData.append("submit", await captureUserCodeResult());
+    } catch {
+      return;
+    }
+
+    loadingCounterRef.current++;
+    setIsSimillarityLoading(true);
+
     const json = await fetch(`http://${domain}/compare`, {
       method: "POST",
       body: formData,
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .catch((error) => console.error(error));
 
     setSimillarity(json?.score ? json.score * 100 : 0);
+    loadingCounterRef.current--;
+    if (loadingCounterRef.current === 0) setIsSimillarityLoading(false);
   };
 
   const editorChangeHandler = (code: string | undefined) => {
@@ -216,6 +232,11 @@ const ProblemSolve = () => {
                     label={`결과물 유사도: ${parseFloat(
                       simillarity.toFixed(2)
                     )}%`}
+                  />
+                  <ClipLoader
+                    color="#999"
+                    loading={isSimillarityLoading}
+                    size={20}
                   />
                 </ProgressBarBox>
                 <Button variant="green">제출</Button>

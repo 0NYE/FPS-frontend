@@ -103,5 +103,12 @@ export const SubmissionControlBox = styled.div`
 `;
 
 export const ProgressBarBox = styled.div`
+  position: relative;
   width: 75%;
+
+  & > span {
+    position: absolute;
+    top: 0;
+    right: -25px;
+  }
 `;
