@@ -17,7 +17,7 @@ export const EditorControlBox = styled.div`
   left: 0;
   transform: translateY(-100%);
   width: 100%;
-  height: 36px;
+  height: 42px;
   padding: 0 8px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -35,6 +35,12 @@ export const LanguageButton = styled.button<{
   color: ${(props) => (props.active ? props.theme.colors.white : props.color)};
   font-size: 13px;
   cursor: pointer;
+  transition: background-color 220ms ease;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.active ? props.color : props.color + "20"};
+  }
 `;
 
 export const EditorBox = styled.div`
