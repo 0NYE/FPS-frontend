@@ -1,10 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Editor, { OnMount } from "@monaco-editor/react";
 import { useAtom } from "jotai";
 import { editor } from "monaco-editor";
 
+import { ReactComponent as Reset } from "@/assets/images/replay.svg";
+import { ReactComponent as ShortCut } from "@/assets/images/shortcut.svg";
 import { htmlAtom, cssAtom, jsAtom } from "@/atoms/code";
 import Button from "@/components/Button/Button.component";
 import CodeResultFrame from "@/components/CodeResultFrame/CodeResultFrame.component";
@@ -20,7 +23,6 @@ import {
   LanguageButton,
   AdditionalControlBox,
   EditorToolButton,
-  EditorControlButtonToolTipBox,
   EditorBox,
   UserCodeRenderBoxWrapper,
   UserCodeRenderBox,
@@ -30,7 +32,6 @@ import {
 import { colors } from "@/style/theme";
 import { ProblemDetailInformation } from "@/types/problem";
 import { iframeToPNG } from "@/utils/html2canvas";
-
 type Languages = "html" | "css" | "javascript";
 
 const ProblemSolve = () => {
@@ -45,18 +46,23 @@ const ProblemSolve = () => {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const changeFlag = useRef(false);
   const [simillarity, setSimillarity] = useState(0);
+  const notifyShortcuts = () =>
+    toast.info("되돌리기: Ctrl + Z", {
+      autoClose: false,
+    });
+
+  const resetAllState = useCallback(() => {
+    setCurrentLanguage("html");
+    setHtml("");
+    setCss("");
+    setJs("");
+    setSimillarity(0);
+    editorRef.current?.setValue("");
+  }, [setHtml, setCss, setJs, setSimillarity]);
 
   useEffect(() => {
-    const resetAllState = () => {
-      setCurrentLanguage("html");
-      setHtml("");
-      setCss("");
-      setJs("");
-      setSimillarity(0);
-      editorRef.current?.setValue("");
-    };
     resetAllState();
-  }, [setHtml, setCss, setJs, setSimillarity, problem_id]);
+  }, [problem_id, resetAllState]);
 
   const langButtonClickHandler: React.MouseEventHandler<HTMLDivElement> = (
     e
@@ -70,6 +76,18 @@ const ProblemSolve = () => {
     else if (language === "css") editorRef.current?.setValue(css);
     else if (language === "javascript") editorRef.current?.setValue(js);
     changeFlag.current = false;
+  };
+
+  const resetButtonClickHandler: React.MouseEventHandler<
+    HTMLButtonElement
+  > = () => {
+    resetAllState();
+  };
+
+  const showShortcutsButtonClickHandler: React.MouseEventHandler<
+    HTMLButtonElement
+  > = () => {
+    notifyShortcuts();
   };
 
   const editorMountHandler: OnMount = (editor) => {
@@ -134,27 +152,38 @@ const ProblemSolve = () => {
           rightChildren={
             <SolveSectionLayout>
               <EditorControlBox onClick={langButtonClickHandler}>
-                <LanguageButton
-                  color={colors.htmlTheme}
-                  data-lang="html"
-                  active={currentLanguage === "html"}
-                >
-                  HTML
-                </LanguageButton>
-                <LanguageButton
-                  color={colors.cssTheme}
-                  data-lang="css"
-                  active={currentLanguage === "css"}
-                >
-                  CSS
-                </LanguageButton>
-                <LanguageButton
-                  color={colors.jsTheme}
-                  data-lang="javascript"
-                  active={currentLanguage === "javascript"}
-                >
-                  JavaScript
-                </LanguageButton>
+                <LanguageButtonBox>
+                  {" "}
+                  <LanguageButton
+                    color={colors.htmlTheme}
+                    data-lang="html"
+                    active={currentLanguage === "html"}
+                  >
+                    HTML
+                  </LanguageButton>
+                  <LanguageButton
+                    color={colors.cssTheme}
+                    data-lang="css"
+                    active={currentLanguage === "css"}
+                  >
+                    CSS
+                  </LanguageButton>
+                  <LanguageButton
+                    color={colors.jsTheme}
+                    data-lang="javascript"
+                    active={currentLanguage === "javascript"}
+                  >
+                    JavaScript
+                  </LanguageButton>
+                </LanguageButtonBox>
+                <AdditionalControlBox>
+                  <EditorToolButton onClick={resetButtonClickHandler}>
+                    <Reset />
+                  </EditorToolButton>
+                  <EditorToolButton onClick={showShortcutsButtonClickHandler}>
+                    <ShortCut />
+                  </EditorToolButton>
+                </AdditionalControlBox>
               </EditorControlBox>
               <EditorBox>
                 <Editor

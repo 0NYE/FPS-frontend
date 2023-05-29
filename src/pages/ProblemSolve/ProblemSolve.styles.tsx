@@ -10,8 +10,8 @@ export const SolveSectionLayout = styled.div`
 
 export const EditorControlBox = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
   position: absolute;
   top: 0;
   left: 0;
@@ -24,7 +24,10 @@ export const EditorControlBox = styled.div`
   background-color: ${(props) => props.theme.colors.white};
 `;
 
-export const LanguageButtonBox = styled.div``;
+export const LanguageButtonBox = styled.div`
+  display: flex;
+  gap: 12px;
+`;
 
 export const LanguageButton = styled.button<{
   color?: string;
@@ -45,11 +48,34 @@ export const LanguageButton = styled.button<{
   }
 `;
 
-export const AdditionalControlBox = styled.div``;
+export const AdditionalControlBox = styled.div`
+  display: flex;
+  gap: 4px;
+`;
 
-export const EditorToolButton = styled.button``;
+export const EditorToolButton = styled.button`
+  display: flex;
+  position: relative;
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
 
-export const EditorControlButtonToolTipBox = styled.div``;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.grey4};
+
+    & > svg {
+      stroke: ${(props) => props.theme.colors.grey1};
+    }
+  }
+
+  & > svg {
+    width: 15px;
+    height: 15px;
+    stroke: ${(props) => props.theme.colors.grey3};
+  }
+`;
 
 export const EditorBox = styled.div`
   flex-grow: 1;
