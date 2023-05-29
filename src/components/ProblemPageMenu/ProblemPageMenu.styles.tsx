@@ -14,7 +14,8 @@ export const ProblemPageMenuLink = styled(NavLink)`
   background-color: transparent;
   color: ${(props) => props.theme.colors.grey1};
 
-  &.active {
+  &.active,
+  &[data-active] {
     border-color: ${(props) => props.theme.colors.black};
     background-color: ${(props) => props.theme.colors.black};
     color: ${(props) => props.theme.colors.white};

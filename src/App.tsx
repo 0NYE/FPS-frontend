@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,7 +19,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route index element={<DummyPage />} />
+        <Route index element={<ProblemListPage />} />
         <Route path="/problems" element={<ProblemListPage />} />
         <Route path="/create-problem" element={<CreateProblemPage />} />
         <Route path="/problems/:problem_id/*" element={<ProblemPage />} />
@@ -41,15 +40,5 @@ function App() {
     </ThemeProvider>
   );
 }
-
-const DummyPage = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate("/problems");
-  }, []);
-
-  return <></>;
-};
 
 export default App;

@@ -29,7 +29,14 @@ const MainHeader = () => {
         <MainHeaderNav>
           <MainHeaderNavList>
             <MainHeaderNavListItem>
-              <MainHeaderNavLink to="/problems">문제 풀기</MainHeaderNavLink>
+              <MainHeaderNavLink
+                to="/problems"
+                data-active={
+                  window.location.pathname === "/" ? "active" : undefined
+                }
+              >
+                문제 풀기
+              </MainHeaderNavLink>
             </MainHeaderNavListItem>
             <MainHeaderNavListItem>
               <MainHeaderNavLink to="/create-problem">
