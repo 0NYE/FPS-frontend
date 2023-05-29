@@ -128,7 +128,7 @@ const ProblemSolve = () => {
               htmlCode={problem.HTML_code}
               cssCode={problem.CSS_code}
               jsCode={problem.JS_code}
-              tipText="잘 모르겠다면 브라우저 개발자 도구를 활용해보세요!"
+              tipText="정확한 수치를 모르겠다면 브라우저 개발자 도구를 활용해보세요!"
             />
           }
           rightChildren={
