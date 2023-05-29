@@ -10,7 +10,7 @@ export interface Problem {
   isHTML: boolean;
   isCSS: boolean;
   isJS: boolean;
-  detailInfo: ProblemDetailInformation;
+  detailInfo?: ProblemDetailInformation;
 }
 
 export interface ProblemDetailInformation {
