@@ -15,6 +15,7 @@ import Avatar from "../Avatar/Avatar.component";
 import { CircleChart } from "../CircleChart/CircleChart.component";
 
 import { ReactComponent as RightChevron } from "@/assets/images/RightChevron.svg";
+import { dateToYMDHMString } from "@/utils/date";
 
 interface SubmissionBlockProps {
   id: string;
@@ -43,11 +44,6 @@ const SubmissionBlock = ({
   isActive,
   date,
 }: SubmissionBlockProps) => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  const hour = date.getHours();
-  const min = date.getMinutes().toString().padStart(2, "0");
   const totalScore = Object.values(metricScores).reduce(
     (totalScore, score) => totalScore + score
   );
@@ -59,9 +55,7 @@ const SubmissionBlock = ({
           <PassDiv isSuccess={isSuccess}>
             {isSuccess ? "통과" : `실패: ${reason}`}
           </PassDiv>
-          <TimeDiv>
-            {year}-{month}-{day} {hour}:{min}
-          </TimeDiv>
+          <TimeDiv>{dateToYMDHMString(date)}</TimeDiv>
           <UserInform>
             <Avatar src={avatarURL} size="small"></Avatar>
             {userName}
