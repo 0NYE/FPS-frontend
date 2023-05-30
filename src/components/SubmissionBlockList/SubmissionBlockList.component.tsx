@@ -1,5 +1,6 @@
 import SubmissionBlock from "@/components/SubmissionBlock/SubmissionBlock.component";
 import { ProblemSubmitResult } from "@/types/problem";
+import { lighthouseReportToMetricScoreMap } from "@/utils/lighthouse";
 
 interface SubmissionsBlockListProps {
   submissionResults: ProblemSubmitResult[];
@@ -25,18 +26,9 @@ const SubmissionBlockList = ({
         ) => {
           if (!parsedLighthouseReport) return <li></li>;
 
-          const metricScores = Object.keys(
-            parsedLighthouseReport.categories
-          ).reduce((object, category) => {
-            const categoryInfo =
-              parsedLighthouseReport.categories[
-                category as keyof typeof parsedLighthouseReport.categories
-              ];
-            if (!categoryInfo) return object;
-
-            object[categoryInfo.title] = categoryInfo.score * 100;
-            return object;
-          }, {} as { [K: string]: number });
+          const metricScores = lighthouseReportToMetricScoreMap(
+            parsedLighthouseReport
+          );
 
           return (
             <li key={submission_date}>
