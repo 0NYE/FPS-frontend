@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { useAtomValue } from "jotai";
+
+import { userAtom } from "@/atoms/user";
 import SubmissionBlockList from "@/components/SubmissionBlockList/SubmissionBlockList.component";
 import SubmissionSummary from "@/components/SubmissionSummary/SubmissionSummary.component";
 import TwoVerticalSection from "@/components/TwoVerticalSection/TwoVerticalSection.component";
 import { domain } from "@/constants/api";
 import { useFetch } from "@/hooks/useFetch";
 import { LighthouseReport } from "@/types/lighthouse";
-import { ProblemSubmitApiResult , ProblemSubmitResult } from "@/types/problem";
+import { ProblemSubmitApiResult, ProblemSubmitResult } from "@/types/problem";
 
 const ProblemSubmissions = () => {
+  const user = useAtomValue(userAtom);
   const { problem_id } = useParams();
   const [submissionIndex, setSubmissionIndex] = useState(-1);
   const { data: problemSubmissions } = useFetch<ProblemSubmitResult[]>(
@@ -40,8 +44,8 @@ const ProblemSubmissions = () => {
       leftChildren={
         <SubmissionBlockList
           submissionResults={parsedProblemSubmissions}
-          userName="jjiny"
-          avatarUrl=""
+          userName={user ? user.nickname : ""}
+          avatarUrl={user ? user.profile_image : ""}
           onClick={submissionClickHandler}
           selectedIndex={submissionIndex}
         />
@@ -49,8 +53,8 @@ const ProblemSubmissions = () => {
       rightChildren={
         parsedProblemSubmissions[submissionIndex] && (
           <SubmissionSummary
-            userName="jjiny"
-            avatarUrl=""
+            userName={user ? user.nickname : ""}
+            avatarUrl={user ? user.profile_image : ""}
             problemSubmitResult={parsedProblemSubmissions[submissionIndex]}
           />
         )
