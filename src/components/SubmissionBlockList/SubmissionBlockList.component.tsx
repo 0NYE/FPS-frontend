@@ -1,4 +1,5 @@
 import SubmissionBlock from "@/components/SubmissionBlock/SubmissionBlock.component";
+import { SubmissionsBlockListLayout } from "@/components/SubmissionBlockList/SubmissionBlockList.styles";
 import { ProblemSubmitResult } from "@/types/problem";
 import { lighthouseReportToMetricScoreMap } from "@/utils/lighthouse";
 
@@ -25,7 +26,7 @@ const SubmissionBlockList = ({
   });
 
   return (
-    <ul>
+    <SubmissionsBlockListLayout>
       {submissionResults.map(
         (
           {
@@ -64,7 +65,7 @@ const SubmissionBlockList = ({
           );
         }
       )}
-    </ul>
+    </SubmissionsBlockListLayout>
   );
 };
 

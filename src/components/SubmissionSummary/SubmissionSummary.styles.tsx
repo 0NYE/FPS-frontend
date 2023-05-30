@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const SubmissionSummaryLayout = styled.div`
+  height: 91%;
   display: flex;
   flex-direction: column;
   gap: 16px;
   position: relative;
   padding: 16px;
+  overflow-y: auto;
 
   & > a {
     position: absolute;
