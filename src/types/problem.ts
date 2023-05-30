@@ -29,7 +29,7 @@ export interface ProblemSubmitResult {
   HTML_code: string;
   CSS_code: string;
   JS_code: string;
-  submission_date: string;
+  submission_date: string | Date;
   success: boolean;
   fail_reason: string;
   similarity: number;

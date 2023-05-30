@@ -21,16 +21,28 @@ const ProblemSubmissions = () => {
   );
   if (!problemSubmissions) return <TwoVerticalSection></TwoVerticalSection>;
 
-  const parsedProblemSubmissions = problemSubmissions.map(
-    (problemSubmission) => {
+  const parsedProblemSubmissions = problemSubmissions
+    .map((problemSubmission) => {
       return {
         ...problemSubmission,
         parsedLighthouseReport: JSON.parse(
           problemSubmission.lighthouse_report
         ) as LighthouseReport,
       };
-    }
-  );
+    })
+    .map((result) => {
+      const convertedDate = new Date(result.submission_date);
+      convertedDate.setHours(new Date(result.submission_date).getHours() - 9);
+      return {
+        ...result,
+        submission_date: convertedDate,
+      };
+    })
+    .sort(
+      (a, b) =>
+        (b.submission_date as Date).getTime() -
+        (a.submission_date as Date).getTime()
+    );
 
   const submissionClickHandler = (id: string) => {
     setSubmissionIndex(Number(id));

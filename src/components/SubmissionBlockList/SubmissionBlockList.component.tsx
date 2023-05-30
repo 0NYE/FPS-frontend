@@ -18,13 +18,6 @@ const SubmissionBlockList = ({
   onClick,
   selectedIndex,
 }: SubmissionsBlockListProps) => {
-  submissionResults.sort((a, b) => {
-    return (
-      new Date(b.submission_date).getTime() -
-      new Date(a.submission_date).getTime()
-    );
-  });
-
   return (
     <SubmissionsBlockListLayout>
       {submissionResults.map(
@@ -46,7 +39,7 @@ const SubmissionBlockList = ({
           };
 
           return (
-            <li key={submission_date + index}>
+            <li key={(submission_date as Date).getTime() + index}>
               <SubmissionBlock
                 id={index.toString()}
                 isSuccess={success}
@@ -59,7 +52,7 @@ const SubmissionBlockList = ({
                   onClick && onClick(id);
                 }}
                 isActive={selectedIndex === index}
-                date={new Date(submission_date)}
+                date={submission_date as Date}
               ></SubmissionBlock>
             </li>
           );
