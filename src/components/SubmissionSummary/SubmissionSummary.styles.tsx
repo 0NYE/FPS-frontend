@@ -16,6 +16,7 @@ export const SubmissionSummaryLayout = styled.div`
 
 export const SubmissionSummaryHeader = styled.header`
   display: flex;
+  align-items: center;
   gap: 8px;
 `;
 

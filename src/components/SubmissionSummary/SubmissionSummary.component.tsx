@@ -47,7 +47,7 @@ const SubmissionSummary = ({
   return (
     <SubmissionSummaryLayout>
       <SubmissionSummaryHeader>
-        <Avatar src={avatarUrl} />
+        <Avatar size="medium" src={avatarUrl} />
         <SubmissionSummaryHeaderTextBox>
           <SubmissionSummaryHeaderTitle>{`${userName}님의 제출 기록 요약`}</SubmissionSummaryHeaderTitle>
           <SubmissionSummaryHeaderDateParagraph>
