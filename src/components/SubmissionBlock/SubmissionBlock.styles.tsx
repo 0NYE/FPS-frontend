@@ -9,9 +9,14 @@ export const SubmissionBlockLayout = styled.div<{ isActive: boolean }>`
   padding: 8px 16px;
   background: ${(props) =>
     props.isActive
-      ? `${props.theme.colors.green}`
-      : `${props.theme.colors.grey4}`};
+      ? `${props.theme.colors.blue}18`
+      : `${props.theme.colors.white}`};
+  transition: background-color 200ms ease;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.blue + "18"};
+  }
 `;
 
 export const SubmissionBlockLeftColumn = styled.div`
@@ -58,6 +63,6 @@ export const ScoreDiv = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  width: 68px;
+  width: 84px;
   font-size: 12px;
 `;
