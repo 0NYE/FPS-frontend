@@ -23,14 +23,20 @@ export interface ProblemDetailInformation {
   JS_code: string;
 }
 
+export interface ProblemSubmitApiResult {
+  success: boolean;
+  report: string;
+}
+
 export interface ProblemSubmitResult {
   problem_id: string;
   user_id: string;
-  html_code: string;
-  css_code: string;
-  js_code: string;
+  HTML_code: string;
+  CSS_code: string;
+  JS_code: string;
   submission_date: string;
   success: boolean;
   fail_reason: string;
-  lighthouse_report: LighthouseReport;
+  lighthouse_report: string;
+  parsedLighthouseReport?: LighthouseReport;
 }

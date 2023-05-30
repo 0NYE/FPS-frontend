@@ -44,10 +44,10 @@ const SubmissionBlock = ({
   date,
 }: SubmissionBlockProps) => {
   const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
   const hour = date.getHours();
-  const min = date.getMinutes();
+  const min = date.getMinutes().toString().padStart(2, "0");
   const totalScore = Object.values(metricScores).reduce(
     (totalScore, score) => totalScore + score
   );
@@ -56,8 +56,9 @@ const SubmissionBlock = ({
     <SubmissionBlockLayout isActive={isActive} onClick={() => handleClick(id)}>
       <SubmissionBlockLeftColumn>
         <SubmissionBlockInfoBox>
-          {isSuccess && <PassDiv isSuccess={isSuccess}>통과</PassDiv>}
-          {!isSuccess && <PassDiv isSuccess={isSuccess}>실패:{reason}</PassDiv>}
+          <PassDiv isSuccess={isSuccess}>
+            {isSuccess ? "통과" : `실패: ${reason}`}
+          </PassDiv>
           <TimeDiv>
             {year}-{month}-{day} {hour}:{min}
           </TimeDiv>
