@@ -23,18 +23,13 @@ export interface ProblemDetailInformation {
   JS_code: string;
 }
 
-export interface ProblemSubmitApiResult {
-  success: boolean;
-  report: string;
-}
-
 export interface ProblemSubmitResult {
   problem_id: string;
   user_id: string;
   HTML_code: string;
   CSS_code: string;
   JS_code: string;
-  submission_date: string;
+  submission_date: string | Date;
   success: boolean;
   fail_reason: string;
   similarity: number;

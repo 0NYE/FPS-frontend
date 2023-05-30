@@ -55,7 +55,7 @@ const ProblemPageHeader = () => {
           로그인
         </ProblemPageHeaderLoginButton>
       ) : (
-        <Avatar size="small" />
+        <Avatar size="small" src={user.profile_image} />
       )}
     </ProblemPageHeaderLayout>
   );

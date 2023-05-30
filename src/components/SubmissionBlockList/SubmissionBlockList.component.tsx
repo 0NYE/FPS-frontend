@@ -1,4 +1,5 @@
 import SubmissionBlock from "@/components/SubmissionBlock/SubmissionBlock.component";
+import { SubmissionsBlockListLayout } from "@/components/SubmissionBlockList/SubmissionBlockList.styles";
 import { ProblemSubmitResult } from "@/types/problem";
 import { lighthouseReportToMetricScoreMap } from "@/utils/lighthouse";
 
@@ -18,7 +19,7 @@ const SubmissionBlockList = ({
   selectedIndex,
 }: SubmissionsBlockListProps) => {
   return (
-    <ul>
+    <SubmissionsBlockListLayout>
       {submissionResults.map(
         (
           {
@@ -38,7 +39,7 @@ const SubmissionBlockList = ({
           };
 
           return (
-            <li key={submission_date}>
+            <li key={(submission_date as Date).getTime() + index}>
               <SubmissionBlock
                 id={index.toString()}
                 isSuccess={success}
@@ -51,13 +52,13 @@ const SubmissionBlockList = ({
                   onClick && onClick(id);
                 }}
                 isActive={selectedIndex === index}
-                date={new Date(submission_date)}
+                date={submission_date as Date}
               ></SubmissionBlock>
             </li>
           );
         }
       )}
-    </ul>
+    </SubmissionsBlockListLayout>
   );
 };
 

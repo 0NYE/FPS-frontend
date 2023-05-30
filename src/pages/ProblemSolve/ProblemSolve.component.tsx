@@ -50,6 +50,7 @@ const ProblemSolve = () => {
   const [simillarity, setSimillarity] = useState(0);
   const loadingCounterRef = useRef(0);
   const [isSimillarityLoading, setIsSimillarityLoading] = useState(false);
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
   const navigate = useNavigate();
   const notifyShortcuts = () =>
     toast.info("되돌리기: Ctrl + Z", {
@@ -165,15 +166,19 @@ const ProblemSolve = () => {
       formData.append("css_code", css);
       formData.append("js_code", js);
 
+      setIsSubmitLoading(true);
+
       const response = await fetch(`http://${domain}/problems/submit`, {
         method: "POST",
         body: formData,
       });
 
       if (!response.ok) throw new Error();
+      setIsSubmitLoading(false);
       notifySubmissionSuccess();
-      navigate("submissions");
+      navigate(`/problems/${problem_id}/submissions`);
     } catch {
+      setIsSubmitLoading(false);
       notifySubmissionError();
     }
   };
@@ -263,13 +268,18 @@ const ProblemSolve = () => {
                     )}%`}
                   />
                   <ClipLoader
-                    color="#999"
+                    color={colors.blue}
                     loading={isSimillarityLoading}
                     size={20}
                   />
                 </ProgressBarBox>
                 <Button variant="green" onClick={submitButtonClickHandler}>
-                  제출
+                  {!isSubmitLoading ? "제출" : "채점중입니다..."}
+                  <ClipLoader
+                    color={colors.blue}
+                    loading={isSubmitLoading}
+                    size={20}
+                  />
                 </Button>
               </SubmissionControlBox>
             </SolveSectionLayout>

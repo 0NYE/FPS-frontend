@@ -37,17 +37,21 @@ const SubmissionSummary = ({
     HTML_code,
     CSS_code,
     JS_code,
+    similarity,
     diff_image_url,
     report_url,
     parsedLighthouseReport,
   } = problemSubmitResult;
   if (!parsedLighthouseReport) return <>라이트하우스 결과가 필요합니다!</>;
-  const metricScores = lighthouseReportToMetricScoreMap(parsedLighthouseReport);
+  const metricScores = {
+    "UI 유사도": Math.round(similarity * 100),
+    ...lighthouseReportToMetricScoreMap(parsedLighthouseReport),
+  } as { [K: string]: number };
 
   return (
     <SubmissionSummaryLayout>
       <SubmissionSummaryHeader>
-        <Avatar src={avatarUrl} />
+        <Avatar size="medium" src={avatarUrl} />
         <SubmissionSummaryHeaderTextBox>
           <SubmissionSummaryHeaderTitle>{`${userName}님의 제출 기록 요약`}</SubmissionSummaryHeaderTitle>
           <SubmissionSummaryHeaderDateParagraph>
@@ -61,7 +65,7 @@ const SubmissionSummary = ({
             <li key={key}>
               <SubmissionSummaryScoreBox>
                 <CircleChart
-                  score={metricScores[key] * 100}
+                  score={metricScores[key]}
                   perfectScore={100}
                   size="medium"
                   animation={true}
@@ -72,6 +76,7 @@ const SubmissionSummary = ({
           );
         })}
       </SubmissionSummaryScoreList>
+      <SubmissionSummaryCodetitle>UI 차이</SubmissionSummaryCodetitle>
       <SubmissionsSummaryDiffImage src={diff_image_url} />
       <SubmissionSummaryCodeSection>
         <SubmissionSummaryCodetitle>HTML</SubmissionSummaryCodetitle>

@@ -51,7 +51,7 @@ const MainHeader = () => {
           로그인
         </MainHeaderLoginButton>
       ) : (
-        <Avatar size="small" />
+        <Avatar size="small" src={user.profile_image} />
       )}
     </MainHeaderLayout>
   );
