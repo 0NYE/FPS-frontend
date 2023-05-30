@@ -46,7 +46,7 @@ const SubmissionSummary = ({
   const metricScores = {
     "UI 유사도": Math.round(similarity * 100),
     ...lighthouseReportToMetricScoreMap(parsedLighthouseReport),
-  };
+  } as { [K: string]: number };
 
   return (
     <SubmissionSummaryLayout>
@@ -76,6 +76,7 @@ const SubmissionSummary = ({
           );
         })}
       </SubmissionSummaryScoreList>
+      <SubmissionSummaryCodetitle>UI 차이</SubmissionSummaryCodetitle>
       <SubmissionsSummaryDiffImage src={diff_image_url} />
       <SubmissionSummaryCodeSection>
         <SubmissionSummaryCodetitle>HTML</SubmissionSummaryCodetitle>
