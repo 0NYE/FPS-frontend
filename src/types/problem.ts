@@ -23,11 +23,6 @@ export interface ProblemDetailInformation {
   JS_code: string;
 }
 
-export interface ProblemSubmitApiResult {
-  success: boolean;
-  report: string;
-}
-
 export interface ProblemSubmitResult {
   problem_id: string;
   user_id: string;

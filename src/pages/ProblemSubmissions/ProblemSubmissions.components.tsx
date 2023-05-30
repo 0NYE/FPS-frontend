@@ -10,7 +10,7 @@ import TwoVerticalSection from "@/components/TwoVerticalSection/TwoVerticalSecti
 import { domain } from "@/constants/api";
 import { useFetch } from "@/hooks/useFetch";
 import { LighthouseReport } from "@/types/lighthouse";
-import { ProblemSubmitApiResult, ProblemSubmitResult } from "@/types/problem";
+import { ProblemSubmitResult } from "@/types/problem";
 
 const ProblemSubmissions = () => {
   const user = useAtomValue(userAtom);
@@ -23,13 +23,10 @@ const ProblemSubmissions = () => {
 
   const parsedProblemSubmissions = problemSubmissions.map(
     (problemSubmission) => {
-      const lighthouseApiResult = JSON.parse(
-        problemSubmission.lighthouse_report
-      ) as ProblemSubmitApiResult;
       return {
         ...problemSubmission,
         parsedLighthouseReport: JSON.parse(
-          lighthouseApiResult.report
+          problemSubmission.lighthouse_report
         ) as LighthouseReport,
       };
     }
