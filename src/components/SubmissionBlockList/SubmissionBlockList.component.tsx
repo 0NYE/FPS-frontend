@@ -38,7 +38,7 @@ const SubmissionBlockList = ({
           };
 
           return (
-            <li key={submission_date}>
+            <li key={submission_date + index}>
               <SubmissionBlock
                 id={index.toString()}
                 isSuccess={success}
