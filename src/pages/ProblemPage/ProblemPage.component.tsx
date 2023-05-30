@@ -7,6 +7,7 @@ import {
   ProblemPageMain,
 } from "@/pages/ProblemPage/ProblemPage.styles";
 import ProblemSolve from "@/pages/ProblemSolve/ProblemSolve.component";
+import ProblemSubmissions from "@/pages/ProblemSubmissions/ProblemSubmissions.components";
 
 const ProblemPage = () => {
   return (
@@ -17,6 +18,7 @@ const ProblemPage = () => {
         <Routes>
           <Route index element={<ProblemSolve />}></Route>
           <Route path="/solve" element={<ProblemSolve />}></Route>
+          <Route path="/submissions" element={<ProblemSubmissions />}></Route>
         </Routes>
       </ProblemPageMain>
     </ProblemPageLayout>

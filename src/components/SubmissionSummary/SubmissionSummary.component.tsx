@@ -14,6 +14,7 @@ import {
   SubmissionSummaryScoreBox,
   SubmissionSummaryScoreList,
   SubmissionSummaryCodetitle,
+  SubmissionsSummaryDiffImage,
 } from "@/components/SubmissionSummary/SubmissionSummary.styles";
 import { ProblemSubmitResult } from "@/types/problem";
 import { dateToYMDHMString } from "@/utils/date";
@@ -36,6 +37,8 @@ const SubmissionSummary = ({
     HTML_code,
     CSS_code,
     JS_code,
+    diff_image_url,
+    report_url,
     parsedLighthouseReport,
   } = problemSubmitResult;
   if (!parsedLighthouseReport) return <>라이트하우스 결과가 필요합니다!</>;
@@ -69,6 +72,7 @@ const SubmissionSummary = ({
           );
         })}
       </SubmissionSummaryScoreList>
+      <SubmissionsSummaryDiffImage src={diff_image_url} />
       <SubmissionSummaryCodeSection>
         <SubmissionSummaryCodetitle>HTML</SubmissionSummaryCodetitle>
         <LanguageSyntaxHighlighter
@@ -97,7 +101,9 @@ const SubmissionSummary = ({
           </LanguageSyntaxHighlighter>
         </SubmissionSummaryCodeSection>
       )}
-      <Button variant="green">자세히 보기</Button>
+      <a href={report_url} target="_blank" rel="noopener noreferrer">
+        <Button variant="green">자세히 보기</Button>
+      </a>
     </SubmissionSummaryLayout>
   );
 };

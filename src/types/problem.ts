@@ -37,6 +37,9 @@ export interface ProblemSubmitResult {
   submission_date: string;
   success: boolean;
   fail_reason: string;
+  similarity: number;
+  diff_image_url: string;
+  report_url: string;
   lighthouse_report: string;
   parsedLighthouseReport?: LighthouseReport;
 }

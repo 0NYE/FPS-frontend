@@ -7,7 +7,7 @@ export const SubmissionSummaryLayout = styled.div`
   position: relative;
   padding: 16px;
 
-  & > button {
+  & > a {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -46,6 +46,8 @@ export const SubmissionSummaryScoreBox = styled.div`
   width: 108px;
   font-size: 16px;
 `;
+
+export const SubmissionsSummaryDiffImage = styled.img``;
 
 export const SubmissionSummaryCodeSection = styled.section`
   max-width: 100%;

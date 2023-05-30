@@ -21,14 +21,21 @@ const SubmissionBlockList = ({
     <ul>
       {submissionResults.map(
         (
-          { submission_date, success, fail_reason, parsedLighthouseReport },
+          {
+            submission_date,
+            success,
+            fail_reason,
+            similarity,
+            parsedLighthouseReport,
+          },
           index
         ) => {
           if (!parsedLighthouseReport) return <li></li>;
 
-          const metricScores = lighthouseReportToMetricScoreMap(
-            parsedLighthouseReport
-          );
+          const metricScores = {
+            "UI 유사도": Math.round(similarity * 100),
+            ...lighthouseReportToMetricScoreMap(parsedLighthouseReport),
+          };
 
           return (
             <li key={submission_date}>
