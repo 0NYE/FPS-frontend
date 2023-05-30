@@ -63,6 +63,6 @@ export const ScoreDiv = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  width: 68px;
+  width: 84px;
   font-size: 12px;
 `;
