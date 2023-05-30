@@ -176,7 +176,7 @@ const ProblemSolve = () => {
       if (!response.ok) throw new Error();
       setIsSubmitLoading(false);
       notifySubmissionSuccess();
-      navigate("submissions");
+      navigate(`/problems/${problem_id}/submissions`);
     } catch {
       setIsSubmitLoading(false);
       notifySubmissionError();
