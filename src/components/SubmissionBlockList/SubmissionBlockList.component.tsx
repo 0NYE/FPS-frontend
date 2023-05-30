@@ -17,6 +17,13 @@ const SubmissionBlockList = ({
   onClick,
   selectedIndex,
 }: SubmissionsBlockListProps) => {
+  submissionResults.sort((a, b) => {
+    return (
+      new Date(b.submission_date).getTime() -
+      new Date(a.submission_date).getTime()
+    );
+  });
+
   return (
     <ul>
       {submissionResults.map(
