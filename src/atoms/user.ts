@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-interface User {
+export interface User {
   nickname: string;
   profile_image: string;
 }

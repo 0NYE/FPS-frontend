@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useAtom } from "jotai";
 
 import { loginModalActiveAtom } from "@/atoms/modal";
-import { userAtom } from "@/atoms/user";
+import { User, userAtom } from "@/atoms/user";
 import Button from "@/components/Button/Button.component";
 import LabeledInput from "@/components/LabeledInput/LabeledInput.component";
 import { LoginFormLayout } from "@/components/LoginForm/LoginForm.style";
@@ -47,7 +47,10 @@ const LoginForm = () => {
     })
       .then((response) => {
         if (!response.ok) throw new Error(response.statusText);
-        setUser(true);
+        return response.json();
+      })
+      .then((user) => {
+        setUser(user as User);
         setLoginModalActive(false);
       })
       .catch((err) => {
