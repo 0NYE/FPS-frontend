@@ -17,7 +17,7 @@ const CodeResultFrame = ({
   const resultSourceCode = html
     ? `
     <html>
-      <body>${html}</body>
+      <body style='height: 100vh; margin: 0' >${html}</body>
       <style>${css}</style>
       <script>${js}</script>
     </html>
