@@ -15,7 +15,9 @@ const ProblemPageMenu = () => {
             <ProblemPageMenuLink
               to="solve"
               data-active={
-                window.location.pathname.indexOf("/problems") !== -1
+                window.location.pathname.length -
+                  window.location.pathname.indexOf("/problems") ===
+                11
                   ? "active"
                   : undefined
               }
