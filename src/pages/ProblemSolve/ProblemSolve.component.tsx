@@ -70,9 +70,9 @@ const ProblemSolve = () => {
     editorRef.current?.setValue("");
   }, [setHtml, setCss, setJs, setSimillarity]);
 
-  useEffect(() => {
-    resetAllState();
-  }, [problem_id, resetAllState]);
+  // useEffect(() => {
+  //   resetAllState();
+  // }, [problem_id, resetAllState]);
 
   const langButtonClickHandler: React.MouseEventHandler<HTMLDivElement> = (
     e
@@ -237,6 +237,7 @@ const ProblemSolve = () => {
               </EditorControlBox>
               <EditorBox>
                 <Editor
+                  defaultValue={html}
                   defaultLanguage="html"
                   loading="에디터를 불러오는 중입니다..."
                   options={{
