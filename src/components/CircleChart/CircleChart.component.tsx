@@ -56,8 +56,8 @@ export const CircleChart = ({
   animation = true,
 }: CircleChartProps) => {
   let theme: Theme = "bad";
-  if (score >= perfectScore * 0.75) theme = "best";
-  else if (score >= perfectScore * 0.25) theme = "good";
+  if (score >= perfectScore * 0.9) theme = "best";
+  else if (score >= perfectScore * 0.5) theme = "good";
 
   const { color, backgroundColor } = circleChartThemes[theme];
   const { radius, strokeWidth, fontSize } = circleChartSizes[size];
