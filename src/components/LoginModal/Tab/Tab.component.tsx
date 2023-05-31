@@ -22,6 +22,7 @@ const Tab = ({ items, onChange }: TabProps) => {
     <TabLayout>
       {items.map((item) => (
         <TabItem
+          key={item}
           isSelected={item === selectedItem}
           onClick={itemOnClickHandler}
         >
