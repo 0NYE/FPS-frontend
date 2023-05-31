@@ -54,6 +54,7 @@ export const SubmissionsSummaryDiffImage = styled.img``;
 
 export const SubmissionSummaryCodeSection = styled.section`
   max-width: 100%;
+  min-height: 200px;
   overflow-x: auto;
 `;
 
