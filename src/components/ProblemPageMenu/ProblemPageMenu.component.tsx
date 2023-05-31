@@ -7,7 +7,6 @@ import {
 } from "@/components/ProblemPageMenu/ProblemPageMenu.styles";
 
 const ProblemPageMenu = () => {
-  console.log(window.location.pathname);
   return (
     <ProblemPageMenuLayout>
       <nav>

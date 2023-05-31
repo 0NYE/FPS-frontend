@@ -100,7 +100,7 @@ const ProblemInputForm = () => {
       notifyError("HTML 파일을 제출해야 합니다.");
       return;
     }
-    console.log("fetch2");
+
     const response = await fetch(`http://${domain}/problems`, {
       method: "POST",
       headers: {
@@ -115,9 +115,9 @@ const ProblemInputForm = () => {
         js_code: jsCode,
       }),
     });
-    console.log("fetch2");
+
     const responseMessage = await response.json();
-    console.log(responseMessage);
+
     if (!response.ok) {
       notifyError(
         "서버 오류로 인해 문제 생성에 실패했습니다. 잠시 후에 다시 시도해주세요"
