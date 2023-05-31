@@ -7,6 +7,7 @@ import {
 } from "@/components/ProblemPageMenu/ProblemPageMenu.styles";
 
 const ProblemPageMenu = () => {
+  console.log(window.location.pathname);
   return (
     <ProblemPageMenuLayout>
       <nav>
@@ -16,8 +17,8 @@ const ProblemPageMenu = () => {
               to="solve"
               data-active={
                 window.location.pathname.length -
-                  window.location.pathname.indexOf("/problems") ===
-                11
+                  window.location.pathname.indexOf("/problems") <
+                "/problems/1/submissions".length
                   ? "active"
                   : undefined
               }
