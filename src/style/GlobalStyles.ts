@@ -12,7 +12,7 @@ const GlobalStyles = createGlobalStyle`
   }
   body {
     font-family: 'Noto Sans KR', sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   a {
     color: inherit;

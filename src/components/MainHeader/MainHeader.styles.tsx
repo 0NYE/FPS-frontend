@@ -68,4 +68,5 @@ export const MainHeaderLayout = styled.header`
   border-bottom: 1px solid ${(props) => props.theme.colors.grey3};
   font-size: 16px;
   background-color: ${(props) => props.theme.colors.white};
+  z-index: 1;
 `;
