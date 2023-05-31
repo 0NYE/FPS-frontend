@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const ProblemListPageLayout = styled.div``;
+export const ProblemListPageLayout = styled.div`
+  margin-top: 66px;
+`;
 
 export const ProblemListPageMain = styled.main`
   display: flex;

@@ -60,6 +60,9 @@ export const MainHeaderLayout = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
   height: 50px;
   padding: 0px 16px;
   border-bottom: 1px solid ${(props) => props.theme.colors.grey3};
